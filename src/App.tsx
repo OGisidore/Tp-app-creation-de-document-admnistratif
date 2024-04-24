@@ -1,18 +1,19 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import { Navbar } from './components/Navbar'
-import { About } from './pages/About'
 import { Home } from './pages/Home'
+import Header from './components/Header/Header'
+import TaskPage from './pages/TaskPage/TaskPage'
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <div className="container">
+    <BrowserRouter >
+
+      <div className=" w-full flex flex-col items-center ">
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/taskPage/:slug" element={<TaskPage />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -11,9 +11,12 @@ const root = createRoot(container!)
 
 root.render(
   <Provider store={store}>
-    <div className=" w-full">
+    <div className=" w-full flex flex-col items-center">
       <div className="gradient"/>
-      <App/>
+      <div className="content">
+         <App/>
+      </div>
+     
     </div>
     
   </Provider>

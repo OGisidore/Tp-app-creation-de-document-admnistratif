@@ -6,6 +6,9 @@
 */
 import React, { FC, useEffect } from 'react';
 import './TaskStyleList.css';
+import { design } from '../../api/data';
+import { Design } from '../../model/design';
+import TaskStyle from '../TaskStyle/TaskStyle';
 
 
 interface TaskStyleListProps {
@@ -26,8 +29,10 @@ const TaskStyleList : FC<TaskStyleListProps> = () =>{
     })
 
   return (
-      <div className="TaskStyleList">
-          TaskStyleList Component
+      <div className="TaskStyleList  flex h-28 gap-3 overflow-y-scroll flex-wrap max-w-[50rem]">
+          {design.map((style:Design)=>{
+            return <TaskStyle key={style._id} design={style}/>
+          })}
       </div>
   );
 }

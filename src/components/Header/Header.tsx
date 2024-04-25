@@ -27,20 +27,18 @@ const Header: FC<HeaderProps> = () => {
   })
 
   return (
-    <div className= ' Header flex flex-col sticky top-0 justify-center items-center'>
-      <div className=" bg-blend-lighten hover:bg-blend-darken drop-shadow-sm w-full flex items-center justify-around">
+    <div className= ' Header flex flex-col  justify-center items-center'>
+      <div className=" bg-blend-lighten hover:bg-blend-darken drop-shadow-sm w-full flex items-center justify-between">
         <Link to={"/"} className=''>
           <img src="/logo.png" alt="" height={100} />
         </Link>
         <div className=' p-4 rounded-full cursor-pointer hover:bg-gray-600  bg-black text-white  '>
           Signaler un bug
         </div>
-
-
       </div>
-      <p className="text-black">
+      {/* <p className="text-black">
         Creez en quelque secondes tous vos documents admnistratifs
-      </p>
+      </p> */}
     </div>
 
   );

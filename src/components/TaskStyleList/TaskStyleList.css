@@ -5,4 +5,7 @@
   Created At : 24/04/2024 04:50:24
 */
 
-.TaskStyleList {}
+.TaskStyleList {
+  padding: 1rem;
+  border: .1rem solid #010101;
+}

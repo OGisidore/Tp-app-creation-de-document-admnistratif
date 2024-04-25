@@ -22,7 +22,10 @@ color: #fff;
   
   /* padding: 120px 24px 160px 24px; */
 }
-
+.content{
+  max-width: fit-content;
+  background-color: #fff;
+}
 .submit{
   background-color: var(--ColorThird);
 }

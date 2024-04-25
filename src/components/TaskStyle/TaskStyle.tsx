@@ -6,14 +6,16 @@
 */
 import React, { FC, useEffect } from 'react';
 import './TaskStyle.css';
+import { Design } from '../../model/design';
 
 
 interface TaskStyleProps {
+  design : Design
  
 }
 
 
-const TaskStyle : FC<TaskStyleProps> = () =>{
+const TaskStyle : FC<TaskStyleProps> = ( {design}) =>{
 
 
 
@@ -26,9 +28,9 @@ const TaskStyle : FC<TaskStyleProps> = () =>{
     })
 
   return (
-      <div className="TaskStyle">
-          TaskStyle Component
-      </div>
+    <div className={" w-6 cursor-pointer " + design.style + " h-10"}> 
+      
+    </div>
   );
 }
 

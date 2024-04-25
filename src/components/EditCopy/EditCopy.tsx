@@ -16,7 +16,7 @@ interface EditCopyProps {
 const EditCopy: FC<EditCopyProps> = () => {
   const [color, setColor] = useState<any>()
   const [rows, setRows] = useState<any[]>(["lola"])
-  const [withTva , setTva] = useState<boolean>(true)
+  const [withTva, setTva] = useState<boolean>(true)
 
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const EditCopy: FC<EditCopyProps> = () => {
 
     }
     runLocalData()
-  },[])
+  }, [])
 
   return (
     <div className="EditCopy mt-2 px-6">
@@ -171,8 +171,8 @@ const EditCopy: FC<EditCopyProps> = () => {
                 <th className='border'>Prix unitaire</th>
                 <th className='border'>Montant HT </th>
                 {withTva && <th className='border'>TVA %</th>}
-                
-                
+
+
                 <th></th>
               </tr>
             </thead>
@@ -186,7 +186,7 @@ const EditCopy: FC<EditCopyProps> = () => {
                   <td className='border'>manger</td>
                   <td className='border'>manger</td>
                   <td className='border'>manger</td>
-                 
+
                   <td>
                     <button>Supprimer</button>
                   </td>

@@ -24,7 +24,12 @@ const EditCopy: FC<EditCopyProps> = () => {
     const runLocalData = async () => {
       console.log(color);
       setRows([""])
+      console.log('lolavgit ~ kiloju');
+      
+      
       setTva(true)
+      console.log("git");
+      
 
 
     }

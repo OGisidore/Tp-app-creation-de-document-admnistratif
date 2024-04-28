@@ -27,7 +27,7 @@ const Header: FC<HeaderProps> = () => {
   })
 
   return (
-    <div className= ' Header flex flex-col  justify-center items-center'>
+    <div className= ' Header flex flex-col w-full justify-center items-center'>
       <div className=" bg-blend-lighten hover:bg-blend-darken drop-shadow-sm w-full flex items-center justify-between">
         <Link to={"/"} className=''>
           <img src="/logo.png" alt="" height={100} />

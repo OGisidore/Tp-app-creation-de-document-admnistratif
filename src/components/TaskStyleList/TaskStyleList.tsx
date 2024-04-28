@@ -29,7 +29,7 @@ const TaskStyleList : FC<TaskStyleListProps> = () =>{
     })
 
   return (
-      <div className="TaskStyleList  flex h-28 gap-3 overflow-y-scroll flex-wrap max-w-[50rem]">
+      <div className="TaskStyleList  flex h-28 gap-3 overflow-y-scroll flex-wrap w-[50%]">
           {design.map((style:Design)=>{
             return <TaskStyle key={style._id} design={style}/>
           })}

@@ -16,14 +16,14 @@ color: #fff;
 
 
 .main {
-  min-width: 60rem;
+  /* min-width: 60rem; */
   min-height: 100vh;
   /* position: fixed; */
   
   /* padding: 120px 24px 160px 24px; */
 }
 .content{
-  max-width: fit-content;
+  /* max-width: fit-content; */
   background-color: #fff;
 }
 .submit{
@@ -63,6 +63,12 @@ color: #fff;
 }
 
 /* Tailwind Styles */
+.tablesBody input {
+  @apply w-[93%];
+}
+.tablesBody .action input {
+  @apply w-[1rem];
+}
 
 .app {
   @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;

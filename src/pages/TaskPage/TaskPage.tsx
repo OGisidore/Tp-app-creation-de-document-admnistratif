@@ -39,7 +39,7 @@ const TaskPage: FC<TaskPageProps> = () => {
 
   return (
 
-    <div className="TaskPage main">
+    <div className="TaskPage w-full  main">
       <PageBanner task={taskItem} />
       <div className="style flex flex-col items-center">
         <h3>Style de la feuilles | choisir le style ici </h3>

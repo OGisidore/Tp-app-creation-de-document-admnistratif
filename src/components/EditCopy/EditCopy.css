@@ -7,20 +7,22 @@
 
 .EditCopy {
   border: .2rem solid #ccc;
-  width: 50vw;
+  /* width: 50vw; */
 }
 .facturNumero{
   border-left: .2rem solid #000;
 }
 .clientDes{
+  /* align-self: flex-end; */
   margin-top: 1rem;
   border : .1rem solid #000;
   border-radius: 1rem ;
 }
 .titleAdInput{
+  width: 90%;
   border : .1rem solid #ccc;
   border-radius: .2rem;
-  padding: .2rem;
+  /* padding: .2rem; */
 
 }
 .titleAdInput input{

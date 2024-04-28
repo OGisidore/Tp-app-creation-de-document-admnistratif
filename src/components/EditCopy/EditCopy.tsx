@@ -53,7 +53,7 @@ const EditCopy: FC<EditCopyProps> = () => {
   }, [])
 
   return (
-    <div className="EditCopy mt-2 px-6">
+    <div className="EditCopy w-[98%l px-2 mt-2">
       <div className="header flex flex-col items-center">
         <div className="headerContent p-2 rounded-b-lg   bg-gray-200">
           <div className="modelSelect flex ">
@@ -79,7 +79,7 @@ const EditCopy: FC<EditCopyProps> = () => {
           </div>
         </div>
       </div>
-      <div className={`socityAndClientInformation  w-full flex justify-between`}>
+      <div className={`socityAndClientInformation  w-full flex flex-wrap justify-between`}>
         <div className="socityInfo">
           <form className='p-2' >
             <div className="previousLogo">
@@ -96,7 +96,7 @@ const EditCopy: FC<EditCopyProps> = () => {
               <input type="text" name="socity_address" id="SAddress" placeholder='Address' />
             </div>
             <div className="socity_cityAndZIP_code p-[0.2rem]">
-              <input type="text" name="socity_ZIP" id="SZip" className="w-20 mr-1" placeholder='ZIP' />
+              <input type="text" name="socity_ZIP" id="SZip" className="w-[20%] mr-1" placeholder='ZIP' />
               <input type="text" name="socity_city" id="SCity" placeholder='city' />
             </div>
             <div className="socityCountry p-[0.2rem]">
@@ -124,45 +124,48 @@ const EditCopy: FC<EditCopyProps> = () => {
           </form>
         </div>
         <div className="clientInfo">
-          <form className='p-3 flex items-stretch flex-col w-full' >
-            <div className="facturNumero p-2 w-[18rem] self-end">
+          <form className='p-3 flex items-stretch flex-col' >
+            <div className="facturNumero p-2 sm:w-[100%] md:w-[100%] lg:w-[80%]  self-end">
               <div className="number">
                 <label htmlFor="numeroFacture">FACTURE N </label>
-                <input type="text" name='numeroFacture' id='numb_facture' />
+                <input type="text" className="w-[50%]" name='numeroFacture' id='numb_facture' />
               </div>
               <div className="emissionDate pt-[0.5rem]">
                 <label htmlFor="date_ofEmission"> Date d'emission :  </label>
-                <input type="date" name="date_ofEmission" id="date" />
+                <input type="date" className="w-[50%]" name="date_ofEmission" id="date" />
               </div>
             </div>
-            <div className="clientDes p-2 w-[18rem] self-end">
-              <div className="clientCode p-[0.2rem]">
-                <input type="text" name="client_code" id="C_code" placeholder='Code client (facultatif)' />
-              </div>
-              <div className="clientFullname p-[0.2rem]">
-                <input type="text" name="Client_Fullname" id="C_fullname" placeholder='Nom et Prenom du client' />
-              </div>
-              <div className="clientAddress p-[0.2rem]">
-                <input type="text" name="Client_Address" id="client_address" placeholder='Address du client' />
-              </div>
-              <div className="client_cityAndZIP_code p-[0.2rem]">
-                <input type="text" name="client_ZIP" id="C_Zip" className="w-20 mr-1" placeholder='code postal' />
-                <input type="text" name="client_city" id="c_City" placeholder='ville' />
+            <div className="clientDes w-[70%] sm:w-[100%] md:w-[100%] lg:w-[80%] flex flex-col items-end p-2 self-end">
+              <div className="all w-[100%]">
+                <div className="clientCode p-[0.2rem]">
+                  <input type="text" name="client_code" id="C_code" placeholder='Code client (facultatif)' />
+                </div>
+                <div className="clientFullname p-[0.2rem]">
+                  <input type="text" name="Client_Fullname" id="C_fullname" placeholder='Nom et Prenom du client' />
+                </div>
+                <div className="clientAddress p-[0.2rem]">
+                  <input type="text" name="Client_Address" id="client_address" placeholder='Address du client' />
+                </div>
+                <div className="client_cityAndZIP_code p-[0.2rem]">
+                  <input type="text" name="client_ZIP" id="C_Zip" className="w-[20%] mr-1" placeholder='code postal' />
+                  <input type="text" name="client_city" id="c_City" placeholder='ville' />
+                </div>
+
+                <div className="clientCountry p-[0.2rem]">
+                  <input type="text" name="Pays" id="Pays" placeholder='Pays' />
+                </div>
+                <div className="clientEmail p-[0.2rem]">
+                  <input type="text" name="phone" id="phone " placeholder='email et telephone' />
+                </div>
+                <div className="clientTva p-[0.2rem]">
+                  <input type="text" name="client_tva" id="c_tva" placeholder='Numero TVA  du client ( facultatif)' />
+                </div>
               </div>
 
-              <div className="clientCountry p-[0.2rem]">
-                <input type="text" name="Pays" id="Pays" placeholder='Pays' />
-              </div>
-              <div className="clientEmail p-[0.2rem]">
-                <input type="text" name="phone" id="phone " placeholder='email et telephone' />
-              </div>
-              <div className="clientTva p-[0.2rem]">
-                <input type="text" name="client_tva" id="c_tva" placeholder='Numero TVA  du client ( facultatif)' />
-              </div>
             </div>
             <div className="titleAdInput mt-2">
               <p>Mettez ici un titre</p>
-              <input type="text" name='Title' id='titleAdd' className="w-[20rem]" />
+              <input type="text" name='Title' id='titleAdd' className="w-[25%]" />
             </div>
 
           </form>
@@ -182,7 +185,7 @@ const EditCopy: FC<EditCopyProps> = () => {
 
         </div>
         <div className="tables ">
-          <div style={{ backgroundColor: color }} className="tableHeader font-bold grid grid-cols-12 ">
+          {/* <div style={{ backgroundColor: color }} className="tableHeader font-bold grid grid-cols-12 ">
             <div className="reference border-[0.1rem] p-1 border-solid border-gray-900">Reference</div>
             <div className="designation border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-3">Designation</div>
             <div className="quantity border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900">Quantite</div>
@@ -194,62 +197,88 @@ const EditCopy: FC<EditCopyProps> = () => {
               withTva && <div className="tva border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900">TVA %</div>
 
             }
+          </div> */}
+          {/* <div style={{ backgroundColor: color }} className="tableHeader font-bold grid grid-cols-12">
+            <div className="reference border-[0.1rem] p-1 border-solid border-gray-900 col-span-12 sm:col-span-2 md:col-span-1">Reference</div>
+            <div className="designation border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-5 md:col-span-3">Designation</div>
+            <div className="quantity border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1">Quantite</div>
+            <div className="Unite border-r-[0.1rem] border-y-[0.1rem] border-l-0 border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1">Unité</div>
+            <div className="unitPrice border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid col-span-12 sm:col-span-2">Prix unitaire HT</div>
+            <div className="remise border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1">Remise %</div>
+            <div className="HtAmount border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1">Montant HT</div>
+            {
+              withTva && <div className="tva border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1">TVA %</div>
+            }
+          </div> */}
+          <div style={{ backgroundColor: color }} className="tableHeader font-bold grid grid-cols-12">
+            <div className="reference border-[0.1rem] p-1 border-solid border-gray-900 col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1">Reference</div>
+            <div className="designation border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-5 md:col-span-4  lg:col-span-3">Designation</div>
+            <div className="quantity border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1">Quantite</div>
+            <div className="Unite border-r-[0.1rem] border-y-[0.1rem] border-l-0 border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">Unité</div>
+            <div className="unitPrice border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid col-span-12 sm:col-span-2 lg:col-span-2 md:col-span-4">Prix unitaire HT</div>
+            <div className="remise border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">Remise %</div>
+            <div className="HtAmount border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">Montant HT</div>
+            {
+              withTva && <div className="tva border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">TVA %</div>
+            }
           </div>
+
+
           {
             rows.map((row: Line) => {
               return <div key={row._id} className="tablesBody grid grid-cols-12">
-                <div className=" p-1 border-y-0 border-x-[0.1rem] border-solid border-gray-900">
-                  <input type="text" className='w-[4rem]' name='reference' placeholder='Reference' />
+                <div className=" p-1 border-y-0 border-x-[0.1rem] col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1 border-solid border-gray-900">
+                  <input type="text" name='reference' placeholder='Reference' />
                 </div>
-                <div className=" col-span-3 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                  <textarea name="designation" id="designation" rows={1} cols={28} ></textarea>
+                <div className=" col-span-12 sm:col-span-5 md:col-span-4  lg:col-span-3 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
+                  <textarea name="designation" className='w[98%]' id="designation" rows={1}  ></textarea>
 
                 </div>
-                <div className=" p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                  <input type="text"  className='w-[4rem]' name='reference' defaultValue={"0"} />
+                <div className=" p-1 border-r-[0.1rem] col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1 border-y-0 border-l-0 border-solid border-gray-900">
+                  <input type="text" name='reference' defaultValue={"0"} />
                 </div>
-                <div className=" p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                  <select name="unit" id="selectUnit">
+                <div className=" col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
+                  <select className='w-[99%]' name="unit" id="selectUnit">
                     <option disabled value="">unite</option>
                     {
-                      unitValue.map((unit)=>{
+                      unitValue.map((unit) => {
                         return <option value={unit.value}> {unit.value} </option>
                       })
                     }
                   </select>
                 </div>
-                <div className=" col-span-2 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                  <input type="text" className='w-[9rem]' name='reference' defaultValue={"0.00"} />
+                <div className=" col-span-12 sm:col-span-2 lg:col-span-2 md:col-span-4 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
+                  <input type="text" name='reference' defaultValue={"0.00"} />
                 </div>
-                <div className=" p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                  <input type="text" className='w-[4rem]' name='reference' defaultValue={"0.00"} />
+                <div className=" p-1 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
+                  <input type="text" name='reference' defaultValue={"0.00"} />
                 </div>
-                <div className=" p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                  <input type="text" className='w-[4rem] border-none outline-none' name='reference' defaultValue={"0.00"} />
+                <div className=" col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
+                  <input type="text" className=' border-none outline-none' name='reference' defaultValue={"0.00"} />
                 </div>
                 {
-                  withTva && <div className=" p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                    <select name="tva" id="tva">
+                  withTva && <div className=" col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
+                    <select className='w-[99%]' name="tva" id="tva">
                       {
-                        tvaPercent.map((tva)=>{
+                        tvaPercent.map((tva) => {
                           return <option key={tva._id} value={tva.value}> {tva.value} </option>
                         })
                       }
-                      
+
                     </select>
                   </div>
                 }
 
-                <div className="bg-gray-100">
+                <div className="bg-gray-100 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">
                   <div className="action flex justify-between px-1 font-bold  bg-gray-100">
                     <div className="titles">
                       <div className="title p-0 m-0">
                         <label htmlFor="addT" className=" text-blue-600">T</label>
-                        <input type="checkbox" name="Tit" id="" />
+                        <input type="checkbox" className='w-[1rem]' name="Tit" id="" />
                       </div>
                       <div className="sum p-0 m-0">
                         <label htmlFor="sumb" className=" text-orange-800">=</label>
-                        <input type="checkbox" name="summ" id="" />
+                        <input type="checkbox" className='w-[1rem]' name="summ" id="" />
                       </div>
                     </div>
                     <div className="AddL">

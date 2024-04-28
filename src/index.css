@@ -69,6 +69,12 @@ color: #fff;
 .tablesBody .action input {
   @apply w-[1rem];
 }
+.totalAmount input {
+  @apply w-[80%]
+}
+.totalAmount .remiseGLobale input {
+  @apply w-[4rem]
+}
 
 .app {
   @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;

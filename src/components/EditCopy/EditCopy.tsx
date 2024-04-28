@@ -8,7 +8,11 @@ import React, { FC, useEffect, useState } from 'react';
 import './EditCopy.css';
 import { generateID } from '../../helpers/utiles';
 import { Line } from '../../model/Line';
-import { tvaPercent, unitValue } from '../../api/data';
+import TableBodyLine from '../TableBodyLine/TableBodyLine';
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes';
+import { getTvaOption } from '../../redux/selectors/selectors';
+import { FaPlus } from "react-icons/fa";
 
 
 interface EditCopyProps {
@@ -17,12 +21,17 @@ interface EditCopyProps {
 
 
 const EditCopy: FC<EditCopyProps> = () => {
+
+
   const [color, setColor] = useState<any>()
+  const [currency, setCurrency]= useState<string>("usd")
   const [rows, setRows] = useState<Line[]>([{
     _id: generateID(),
     name: ""
   }])
-  const [withTva, setTva] = useState<boolean>(true)
+
+  const dispatch = useDispatch()
+
   const handleAddLine = () => {
     setRows([...rows, {
       _id: generateID(),
@@ -36,14 +45,33 @@ const EditCopy: FC<EditCopyProps> = () => {
     setRows(rows.filter((row) => row._id !== id))
   }
 
+  const handleChange = async (e: any) => {
+    const option: string = e.target.value
+    console.log(option);
+    let withTva;
+    if (option.trim() === "Entreprise avec TVA") {
+      console.log("yes");
+      withTva = true;
+    } else {
+      withTva = false;
+    }
+    dispatch({
+      type: ADD_TO_STORAGE,
+      key: "withTVA",
+      unique: true,
+      payload: withTva
+    })
+
+  }
+
+  const withTVA = useSelector(getTvaOption)
+
+
   useEffect(() => {
     window.scrollTo(0, 0)
     const runLocalData = async () => {
       console.log(color);
       console.log('lolavgit ~ kiloju');
-
-
-      setTva(true)
       console.log("git");
 
 
@@ -58,9 +86,9 @@ const EditCopy: FC<EditCopyProps> = () => {
         <div className="headerContent p-2 rounded-b-lg   bg-gray-200">
           <div className="modelSelect flex ">
             <label htmlFor="modele">Modele de facture : </label>
-            <select name="modele" id="model">
+            <select name="modele" defaultValue={"Entreprise avec TVA"} onChange={(e) => handleChange(e)} id="model">
               <option value="Entreprise avec TVA "> Entreprise avec TVA </option>
-              <option value="Entreprise sans TVA "> Entreprise avec TVA </option>
+              <option value="Entreprise sans TVA "> Entreprise sans TVA </option>
               <option value="Auto-entrepreneur "> Auto-entrepreneur </option>
             </select>
           </div>
@@ -185,31 +213,7 @@ const EditCopy: FC<EditCopyProps> = () => {
 
         </div>
         <div className="tables ">
-          {/* <div style={{ backgroundColor: color }} className="tableHeader font-bold grid grid-cols-12 ">
-            <div className="reference border-[0.1rem] p-1 border-solid border-gray-900">Reference</div>
-            <div className="designation border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-3">Designation</div>
-            <div className="quantity border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900">Quantite</div>
-            <div className="Unite border-r-[0.1rem] border-y-[0.1rem] border-l-0 border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900">Unité</div>
-            <div className="unitPrice border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid col-span-2 border-gray-900">Prix unitaire HT</div>
-            <div className="remise border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900">Remise %</div>
-            <div className="HtAmount border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900">Montant HT</div>
-            {
-              withTva && <div className="tva border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900">TVA %</div>
 
-            }
-          </div> */}
-          {/* <div style={{ backgroundColor: color }} className="tableHeader font-bold grid grid-cols-12">
-            <div className="reference border-[0.1rem] p-1 border-solid border-gray-900 col-span-12 sm:col-span-2 md:col-span-1">Reference</div>
-            <div className="designation border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-5 md:col-span-3">Designation</div>
-            <div className="quantity border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1">Quantite</div>
-            <div className="Unite border-r-[0.1rem] border-y-[0.1rem] border-l-0 border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1">Unité</div>
-            <div className="unitPrice border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid col-span-12 sm:col-span-2">Prix unitaire HT</div>
-            <div className="remise border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1">Remise %</div>
-            <div className="HtAmount border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1">Montant HT</div>
-            {
-              withTva && <div className="tva border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1">TVA %</div>
-            }
-          </div> */}
           <div style={{ backgroundColor: color }} className="tableHeader font-bold grid grid-cols-12">
             <div className="reference border-[0.1rem] p-1 border-solid border-gray-900 col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1">Reference</div>
             <div className="designation border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-5 md:col-span-4  lg:col-span-3">Designation</div>
@@ -219,58 +223,15 @@ const EditCopy: FC<EditCopyProps> = () => {
             <div className="remise border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">Remise %</div>
             <div className="HtAmount border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">Montant HT</div>
             {
-              withTva && <div className="tva border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">TVA %</div>
+              withTVA && <div className="tva border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">TVA %</div>
             }
           </div>
 
 
           {
             rows.map((row: Line) => {
-              return <div key={row._id} className="tablesBody grid grid-cols-12">
-                <div className=" p-1 border-y-0 border-x-[0.1rem] col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1 border-solid border-gray-900">
-                  <label htmlFor="reference" className="md:disp"></label>
-                  <input type="text" name='reference' placeholder='Reference' />
-
-                </div>
-                <div className=" col-span-12 sm:col-span-5 md:col-span-4  lg:col-span-3 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                  <textarea name="designation" className='w[98%]' id="designation" rows={1}  ></textarea>
-
-                </div>
-                <div className=" p-1 border-r-[0.1rem] col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1 border-y-0 border-l-0 border-solid border-gray-900">
-                  <input type="text" name='reference' defaultValue={"0"} />
-                </div>
-                <div className=" col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                  <select className='w-[99%]' name="unit" id="selectUnit">
-                    <option disabled value="">unite</option>
-                    {
-                      unitValue.map((unit) => {
-                        return <option value={unit.value}> {unit.value} </option>
-                      })
-                    }
-                  </select>
-                </div>
-                <div className=" col-span-12 sm:col-span-2 lg:col-span-2 md:col-span-4 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                  <input type="text" name='reference' defaultValue={"0.00"} />
-                </div>
-                <div className=" p-1 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                  <input type="text" name='reference' defaultValue={"0.00"} />
-                </div>
-                <div className=" col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                  <input type="text" className=' border-none outline-none' name='reference' defaultValue={"0.00"} />
-                </div>
-                {
-                  withTva && <div className=" col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
-                    <select className='w-[99%]' name="tva" id="tva">
-                      {
-                        tvaPercent.map((tva) => {
-                          return <option key={tva._id} value={tva.value}> {tva.value} </option>
-                        })
-                      }
-
-                    </select>
-                  </div>
-                }
-
+              return <div key={row._id} className="tablesBody mt-2 lg:mt-0 border-solid border-gray-950 border-1 lg:border-0 grid grid-cols-12">
+                <TableBodyLine />
                 <div className="bg-gray-100 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">
                   <div className="action flex justify-between px-1 font-bold  bg-gray-100">
                     <div className="titles">
@@ -289,183 +250,115 @@ const EditCopy: FC<EditCopyProps> = () => {
                     </div>
                   </div>
                 </div>
-
-
-
               </div>
             })
           }
-
-          {/* <table className="shadow-2xl font-[popins] border-2 table-auto w-11/12 border-collapse ">
-            <thead className='text-black'>
-              <tr style={{ backgroundColor: color }}>
-                <th className="py-3 border-2 border-black border-solid">reference</th>
-                <th className='py-3 border-2 border-solid  border-black' >Designation</th>
-                <th className='py-3 border-2 border-solid  border-black'>Quantite</th>
-                <th className='py-3 border-2 border-solid  border-black'>unite</th>
-                <th className='py-3 border-2 border-solid  border-black'>Prix unitaire</th>
-                <th className='py-3 border-2 border-solid  border-black'>Montant HT </th>
-                {withTva && <th className='py-3 border-solid border-2'>TVA %</th>}
-
-
-                <th className='bg-white'></th>
-              </tr>
-            </thead>
-            <tbody>
-
-              {rows.map((row: Line) => {
-                return (
-
-                  <tr key={row._id}>
-                    <td className='border-x-2 border-y-0 border-solid '> 
-                    <input type="text" className='w-[5rem]' name='reference' placeholder='Reference' />
-                    </td>
-                    <td className=' border-x-2 border-y-0 border-solid'>
-                      <input type="text" name='designation' placeholder='entrer ici la designation' />
-                    </td>
-                    <td className=' border-x-2 border-y-0 border-solid'>
-                      <input type="text" className='w-[5rem]' name='Quantite' defaultValue={"0"} />
-                    </td>
-                    <td className=' border-x-2 border-y-0 border-solid'>
-                      <select name="unite" id="">
-                        <option value=""></option>
-                        <option value="A">A</option>
-                        <option value="G">G</option>
-                        <option value="H">H</option>
-                        <option value="Img">Img</option>
-                        <option value="J">J</option>
-                        <option value="Kg">Kg</option>
-                        <option value="Km">Km</option>
-                        <option value="L">L</option>
-                        <option value="lot">lot</option>
-                        <option value="M">M</option>
-                        <option value="M2">M2</option>
-                        <option value="M3">M3</option>
-                        <option value="ML">ML</option>
-                        <option value="Min">Min</option>
-                        <option value="P">P</option>
-                        <option value="Pcs">Pcs</option>
-                        <option value="sec">sec</option>
-                        <option value="T">T</option>
-                      </select>
-                    </td>
-                    <td className=' p-1 border-x-2 border-y-0 border-solid'>
-                      <input type="text" className='w-[5rem]' name='priceUnit' defaultValue={"0.00"} />
-                    </td>
-                    <td className=' border-x-2 border-y-0 border-solid'>
-                      <input type="text" className='w-[5rem]' name='priceUnit' defaultValue={"0.00"} />
-
-                    </td>
-                    {
-                      withTva && <td className=' border-x-2 border-y-0 border-solid'>
-                        <select name="Tva_taux">
-                          <option value="0.00" selected>0.00</option>
-                          <option value="1.00">1.00</option>
-                          <option value="2.00">2.00</option>
-                          <option value="2.10">2.10</option>
-                          <option value="2.40">2.40</option>
-                          <option value="2.50">2.50</option>
-                          <option value="3.00">3.00</option>
-                          <option value="3.80">3.80</option>
-                          <option value="4.00">4.00</option>
-                          <option value="4.50">4.50</option>
-                          <option value="4.80">4.80</option>
-                          <option value="5.00">5.00</option>
-                          <option value="5.50">5.50</option>
-                          <option value="6.00">6.00</option>
-                          <option value="6.50">6.50</option>
-                          <option value="7.00">7.00</option>
-                          <option value="7.60">7.60</option>
-                          <option value="8.00">8.00</option>
-                          <option value="8.50">8.50</option>
-                          <option value="8.75">8.75</option>
-                          <option value="9.00">9.00</option>
-                          <option value="10.00">10.00</option>
-                          <option value="10.50">10.50</option>
-                          <option value="11.00">11.00</option>
-                          <option value="11.50">11.50</option>
-                          <option value="12.00">12.00</option>
-                          <option value="12.50">12.50</option>
-                          <option value="13.00">13.00</option>
-                          <option value="13.50">13.50</option>
-                          <option value="14.00">14.00</option>
-                          <option value="15.00">15.00</option>
-                          <option value="16.00">16.00</option>
-                          <option value="17.00">17.00</option>
-                          <option value="18.00">18.00</option>
-                          <option value="19.00">19.00</option>
-                          <option value="19.25">19.25</option>
-                          <option value="19.60">19.60</option>
-                          <option value="20.00">20.00</option>
-                          <option value="20.60">20.60</option>
-                          <option value="21.00">21.00</option>
-                          <option value="22.00">22.00</option>
-                          <option value="23.00">23.00</option>
-                          <option value="24.00">24.00</option>
-                          <option value="25.00">25.00</option>
-                          <option value="26.00">26.00</option>
-                          <option value="27.00">27.00</option>
-                          <option value="28.00">28.00</option>
-                          <option value="29.00">29.00</option>
-                        </select>
-
-                      </td>
-
-                    }
-
-                    <td>
-                      <div className="action flex justify-between p-1 bg-gray-400">
-                        <div className="titles">
-                          <div className="title">
-                            <label htmlFor="addT" className=" text-blue-600 fontsize font-bold">T</label>
-                            <input type="checkbox" name="Tit" id="" />
-                          </div>
-                          <div className="sum">
-                            <label htmlFor="sumb" className=" text-orange-800 fontsize font-extrabold">=</label>
-                            <input type="checkbox" name="summ" id="" />
-                          </div>
-                        </div>
-                        <div className="AddL">
-                          <div onClick={(e) => handleRemoveLine(e, row._id)} className="remve cursor-pointer text-red-700 fontsize font-extrabold">x</div>
-                          <div onClick={handleAddLine} className="remve cursor-pointer text-green-700 fontsize font-extrabold">+</div>
-                        </div>
-                      </div>
-
-                    </td>
-                  </tr>
-                )
-              })}
-
-
-              <tr>
-                <td className='py-3 border-t-2 border-x-0 border-b-0 border-solid  border-black' rowSpan={3} colSpan={5}>
-                  <div className="flex justify-between">
-                    <div className="item">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus maxime, in dolorem officia, autem vitae ipsum fuga, obcaecati suscipit architecto nisi laboriosam ex atque. Perferendis suscipit molestias aperiam vel cumque!</p>
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus maxime, in dolorem officia, autem vitae ipsum fuga, obcaecati suscipit architecto nisi laboriosam ex atque. Perferendis suscipit molestias aperiam vel cumque!</p>
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus maxime, in dolorem officia, autem vitae ipsum fuga, obcaecati suscipit architecto nisi laboriosam ex atque. Perferendis suscipit molestias aperiam vel cumque!</p>
-                    </div>
-                    <div className="items">polin</div>
-                  </div>
-                </td>
-                <td className='py-3 border-2 border-solid  border-black'>lola</td>
-                <td className="border-t-2 border-x-0 border-b-0 border-solid border-black"></td>
-
-
-              </tr>
-              <tr>
-
-                <td className='py-3 border-2 border-solid  border-black'>lola</td>
-
-
-              </tr>
-            </tbody>
-          </table> */}
-
-
-
         </div>
+        <div className="  grid grid-cols-12">
+          <div className=" col-span-6 h-[20rem] border-0 border-t-[.1rem] border-solid border-gray-950">
+            <div onClick={handleAddLine} className=" cursor-pointer mt-2 flex items-center hover:bg-orange-900 addLineTag">
+              <FaPlus /> <p>Ajouter une ligne</p>
 
+            </div>
+            <div className="addDiscountLIne">
+              <input type="checkbox" name="forAddDiscount" id="forAddDiscount" />
+              <label htmlFor="forAddDiscount">Ajouter une case Remise globale en dessous de la case Total HT.</label>
+            </div>
+            <div className="addDepositCase">
+              <input type="checkbox" name="addDeposit" id="addDeposit" />
+              <label htmlFor="addDeposit">Ajouter une case Acompte juste au dessus de la case Net à payer.
+              </label>
+            </div>
+            <div className="currencyChoiceCase my-[2rem]">
+              <label htmlFor="currencySelect">Symbole, unité ou devise monétaire </label>
+              <select name="currencySelect" className='w-[8rem]' onChange={(e)=>setCurrency(e.target.value)} id="currencySelect">
+                <option value="usd">usd</option>
+                <option value="eur">eur</option>
+                <option value="cfa">cfa</option>
+              </select>
+            </div>
+            <div className="reglement my-[1rem] border-[.1rem] border-solid border-gray-950 relative">
+              <div className="title absolute top-[-0.5rem] left-[0.5rem] px-[0.5rem]  bg-white ">Reglement</div>
+              <div className="element">
+                <ul>
+                  <li>
+                    <label htmlFor="LimitDate">Date limite : </label>
+                    <select name="LimitDate" id="LimitDate">
+                      <option value="A La reception">A La reception</option>
+                      <option value="A La commande">A La commande </option>
+                      <option value="Fin du mois ">Fin du mois  </option>
+                      <option value="15 jours">15 jours </option>
+                      <option value="20 jours">20 jours </option>
+                      <option value="20 jours"> 20 jours </option>
+                      <option value="A La commande">A La commande </option>
+                      <option value="A La commande">A La commande </option>
+                    </select>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className=" totalAmount col-span-6 ">
+            <div className="grid grid-cols-12 h-[2rem]">
+              <div className=" p-1  col-span-6 border-0 border-t-[.1rem] border-solid border-gray-950 text-end">Total HT </div>
+              <div className=" p-1  col-span-2 border-[.1rem] border-solid border-gray-950">
+                <input type="text" className=' border-none ' name='reference' defaultValue={"0.00"} />
+
+              </div>
+              {
+                withTVA && <div className=" p-1  col-span-2 border-0 border-t-[.1rem] border-solid border-gray-950"></div>
+              }
+            </div>
+            <div className="grid grid-cols-12 h-[2rem]">
+              <div className=" remiseGLobale p-1 col-span-6 text-end ">
+                <label htmlFor="remiseGlobal"> Remise Globale  </label>
+                <input type="text" className=' w-[5rem] ' name='reference' defaultValue={"0.00"} />
+                <span> % </span>
+
+              </div>
+              <div className="p-1 col-span-2 border-[.1rem] border-t-0 border-solid border-gray-950">
+                <input type="text" className=' border-none ' name='reference' defaultValue={"0.00"} />
+
+              </div>
+            </div>
+            <div className="grid grid-cols-12 h-[2rem]">
+              <div className=" p-1  col-span-6 text-end ">
+                Total HT après remise globale
+              </div>
+              <div className=" p-1  col-span-2 border-[.1rem] border-t-0 border-solid border-gray-950">
+                <input type="text" className=' border-none ' name='reference' defaultValue={"0.00"} />
+
+              </div>
+            </div>
+            <div className="grid grid-cols-12 h-[2rem]">
+              <div className=" p-1  col-span-6 text-end ">
+                Total TTC
+              </div>
+              <div className=" p-1  col-span-2 border-[.1rem] border-t-0 border-solid border-gray-950">
+                <input type="text" className=' ' name='reference' defaultValue={"0.00"} />
+
+              </div>
+            </div>
+            <div className="grid grid-cols-12 h-[2rem]">
+              <div className=" p-1  col-span-6 text-end ">
+                Acompte
+              </div>
+              <div className=" p-1  col-span-2 border-[.1rem] border-t-0 border-solid border-gray-950">
+                <input type="text" className=' border-none ' name='reference' defaultValue={"0.00"} />
+
+              </div>
+            </div>
+            <div className="grid grid-cols-12 h-[2rem]">
+              <div className=" p-1  col-span-6 text-end font-bold ">
+                Net à payer ({currency})
+              </div>
+              <div className=" p-1  col-span-2 border-[.1rem] border-t-0 border-solid border-gray-950">
+                <input type="text" className=' border-none ' name='reference' defaultValue={"0.00"} />
+
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
 

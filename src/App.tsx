@@ -9,7 +9,7 @@ const App: React.FC = () => {
   return (
     <BrowserRouter >
 
-      <div className=" w-full xl:w-[60%] flex flex-col items-center ">
+      <div className=" w-full xl:w-[65%] flex flex-col items-center ">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

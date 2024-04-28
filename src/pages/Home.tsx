@@ -4,7 +4,7 @@ import { Task } from "../model/Task"
 
 export const Home: React.FC = () => {
   return (
-    <div className=" container flex flex-col items-center w-full  main">
+    <div className="  flex flex-col items-center w-full  main">
       <div className="illustration h-80 flex gap-3 justify-center">
         {/* <img src="/contract-3002431_640.jpg" alt=""/> */}
         <div className="desc">

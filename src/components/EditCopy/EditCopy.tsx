@@ -228,7 +228,9 @@ const EditCopy: FC<EditCopyProps> = () => {
             rows.map((row: Line) => {
               return <div key={row._id} className="tablesBody grid grid-cols-12">
                 <div className=" p-1 border-y-0 border-x-[0.1rem] col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1 border-solid border-gray-900">
+                  <label htmlFor="reference" className="md:disp"></label>
                   <input type="text" name='reference' placeholder='Reference' />
+
                 </div>
                 <div className=" col-span-12 sm:col-span-5 md:col-span-4  lg:col-span-3 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
                   <textarea name="designation" className='w[98%]' id="designation" rows={1}  ></textarea>

@@ -299,7 +299,7 @@ const EditCopy: FC<EditCopyProps> = () => {
             </div>
           </div>
           <div className=" totalAmount col-span-6 ">
-            <div className="grid grid-cols-12 h-[2rem]">
+            <div className="grid grid-cols-12 ">
               <div className=" p-1  col-span-6 border-0 border-t-[.1rem] border-solid border-gray-950 text-end">Total HT </div>
               <div className=" p-1  col-span-2 border-[.1rem] border-solid border-gray-950">
                 <input type="text" className=' border-none ' name='reference' defaultValue={"0.00"} />
@@ -309,7 +309,7 @@ const EditCopy: FC<EditCopyProps> = () => {
                 withTVA && <div className=" p-1  col-span-2 border-0 border-t-[.1rem] border-solid border-gray-950"></div>
               }
             </div>
-            <div className="grid grid-cols-12 h-[2rem]">
+            <div className="grid grid-cols-12 ">
               <div className=" remiseGLobale p-1 col-span-6 text-end ">
                 <label htmlFor="remiseGlobal"> Remise Globale  </label>
                 <input type="text" className=' w-[5rem] ' name='reference' defaultValue={"0.00"} />
@@ -321,7 +321,7 @@ const EditCopy: FC<EditCopyProps> = () => {
 
               </div>
             </div>
-            <div className="grid grid-cols-12 h-[2rem]">
+            <div className="grid grid-cols-12 ">
               <div className=" p-1  col-span-6 text-end ">
                 Total HT après remise globale
               </div>
@@ -330,7 +330,7 @@ const EditCopy: FC<EditCopyProps> = () => {
 
               </div>
             </div>
-            <div className="grid grid-cols-12 h-[2rem]">
+            <div className="grid grid-cols-12 ">
               <div className=" p-1  col-span-6 text-end ">
                 Total TTC
               </div>
@@ -339,7 +339,7 @@ const EditCopy: FC<EditCopyProps> = () => {
 
               </div>
             </div>
-            <div className="grid grid-cols-12 h-[2rem]">
+            <div className="grid grid-cols-12">
               <div className=" p-1  col-span-6 text-end ">
                 Acompte
               </div>
@@ -348,7 +348,7 @@ const EditCopy: FC<EditCopyProps> = () => {
 
               </div>
             </div>
-            <div className="grid grid-cols-12 h-[2rem]">
+            <div className="grid grid-cols-12 ">
               <div className=" p-1  col-span-6 text-end font-bold ">
                 Net à payer ({currency})
               </div>

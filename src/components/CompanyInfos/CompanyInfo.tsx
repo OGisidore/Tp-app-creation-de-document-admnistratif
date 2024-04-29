@@ -11,7 +11,6 @@ interface CompanyInfoProps {}
 
 const CompanyInfo: FC<CompanyInfoProps> = () => {
   useEffect(() => {
-    window.scrollTo(0, 0)
     const runLocalData = async () => {}
     runLocalData()
   })

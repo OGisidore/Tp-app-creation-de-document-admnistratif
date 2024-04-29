@@ -13,6 +13,10 @@ import { Task } from '../../model/Task';
 import PageBanner from '../../components/PageBanner/PageBanner';
 import TaskStyleList from '../../components/TaskStyleList/TaskStyleList';
 import EditCopy from '../../components/EditCopy/EditCopy';
+// import { getAllItems } from '../../api/apiDocument';
+import { useDispatch } from 'react-redux';
+import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes';
+import { getItem } from '../../services/localStorage';
 
 
 interface TaskPageProps {
@@ -27,11 +31,31 @@ const TaskPage: FC<TaskPageProps> = () => {
   const { slug } = useParams()
   const taskItem: Task = tasks.filter((task: Task) => task.slug === slug)[0]
 
-
+  const dispatch = useDispatch()
   useEffect(() => {
-    window.scrollTo(0, 0)
+    // window.scrollTo(0, 0)
     const runLocalData = async () => {
       console.log(taskItem);
+      const designData = await getItem("Design")
+      console.log(designData);
+      
+     
+          dispatch({
+            type: ADD_TO_STORAGE,
+            key: "Design",
+            unique: true,
+            payload: designData
+          })
+        
+
+
+     
+
+
+
+
+
+
 
     }
     runLocalData()

@@ -21,7 +21,7 @@ const TaskStyleList : FC<TaskStyleListProps> = () =>{
 
 
     useEffect(() => {
-      window.scrollTo(0,0)
+      // window.scrollTo(0,0)
       const runLocalData = async () => {
 
       }

@@ -1,4 +1,4 @@
-import { getItem } from "../../services/localStorage";
+import { getItem, removeItem, setItem } from "../../services/localStorage";
 import { ADD_TO_STORAGE, REMOVE_FROM_STORAGE } from "../actions/actionTypes";
 import { StorageAction } from "../actions/types";
 
@@ -38,6 +38,7 @@ export const storageReducers = (state = initState,
 
 
             }
+            setItem(action.key!, action.payload)
             return { ...state }
 
             break;
@@ -60,7 +61,7 @@ export const storageReducers = (state = initState,
                 delete state[action.key]
             }
                 }
-               
+               removeItem(action.key!)
             return { ...state }
             break;
 

@@ -18,7 +18,6 @@ const ClientInfo : FC<ClientInfoProps> = () =>{
 
 
     useEffect(() => {
-      window.scrollTo(0,0)
       const runLocalData = async () => {
 
       }

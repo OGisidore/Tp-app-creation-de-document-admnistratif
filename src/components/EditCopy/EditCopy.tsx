@@ -9,12 +9,14 @@ import './EditCopy.css';
 import { generateID } from '../../helpers/utiles';
 import { Line } from '../../model/Line';
 import TableBodyLine from '../TableBodyLine/TableBodyLine';
-import { useDispatch, useSelector } from 'react-redux';
-import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes';
-import { getTvaOption } from '../../redux/selectors/selectors';
+import { useSelector , useDispatch } from 'react-redux';
+import { getDesign } from '../../redux/selectors/selectors';
 import { FaPlus } from "react-icons/fa";
 import CompanyInfo from '../CompanyInfos/CompanyInfo';
 import ClientInfo from '../ClientInfo/ClientInfo';
+import { Design } from '../../model/design';
+import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes';
+import { getItem } from '../../services/localStorage';
 
 
 interface EditCopyProps {
@@ -24,15 +26,20 @@ interface EditCopyProps {
 
 const EditCopy: FC<EditCopyProps> = () => {
 
-
+  const dispatch = useDispatch()
   const [color, setColor] = useState<any>()
-  const [currency, setCurrency]= useState<string>("usd")
+  const [defaultValues ,  setDefaultValue]=useState <string>("")
+  const [withTVA, setWithTVA] = useState<boolean | any>()
+  const [currency, setCurrency] = useState<string>("usd")
   const [rows, setRows] = useState<Line[]>([{
     _id: generateID(),
     name: ""
   }])
 
-  const dispatch = useDispatch()
+  const design: Design = useSelector(getDesign)
+  console.log(design);
+
+
 
   const handleAddLine = () => {
     setRows([...rows, {
@@ -43,38 +50,51 @@ const EditCopy: FC<EditCopyProps> = () => {
   }
   const handleRemoveLine = (e: any, id: string) => {
     console.log("hello");
-
     setRows(rows.filter((row) => row._id !== id))
   }
 
   const handleChange = async (e: any) => {
     const option: string = e.target.value
     console.log(option);
-    let withTva;
-    if (option.trim() === "Entreprise avec TVA") {
+
+    if (option.trim() !== "Entreprise avec TVA") {
       console.log("yes");
-      withTva = true;
-    } else {
-      withTva = false;
+      setWithTVA(false)
+    }else{
+      setWithTVA(true)
     }
     dispatch({
       type: ADD_TO_STORAGE,
       key: "withTVA",
       unique: true,
-      payload: withTva
+      payload: {
+        option : withTVA,
+        value : option
+      }
     })
 
   }
 
-  const withTVA = useSelector(getTvaOption)
-
+  // const withTVA = useSelector(getTvaOption)
+  console.log(withTVA);
+  
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    // window.scrollTo(0, 0)
     const runLocalData = async () => {
-      console.log(color);
-      console.log('lolavgit ~ kiloju');
-      console.log("git");
+      
+      const model = await  getItem("withTVA")
+      console.log(model.option);
+      
+      if (model) {
+        setWithTVA(model.option)
+        setDefaultValue(model.value)
+        console.log(model.value);
+        
+      }else{
+        setDefaultValue("Entreprise avec TVA")
+        setWithTVA(true)
+      }
 
 
 
@@ -83,13 +103,13 @@ const EditCopy: FC<EditCopyProps> = () => {
   }, [])
 
   return (
-    <div className="EditCopy w-[98%l px-2 mt-2">
+    <div className={"EditCopy w-[98%l px-2 mt-2" + design?.style}>
       <div className="header flex flex-col items-center">
         <div className="headerContent p-2 rounded-b-lg   bg-gray-200">
           <div className="modelSelect flex ">
             <label htmlFor="modele">Modele de facture lola ko : </label>
-            <select name="modele" defaultValue={"Entreprise avec TVA"} onChange={(e) => handleChange(e)} id="model">
-              <option value="Entreprise avec TVA "> Entreprise avec TVA </option>
+            <select name="modele" defaultValue={defaultValues} onChange={(e) => handleChange(e)} id="model">
+              <option value="Entreprise avec TVA " > Entreprise avec TVA </option>
               <option value="Entreprise sans TVA "> Entreprise sans TVA </option>
               <option value="Auto-entrepreneur "> Auto-entrepreneur </option>
             </select>
@@ -110,8 +130,8 @@ const EditCopy: FC<EditCopyProps> = () => {
         </div>
       </div>
       <div className={`socityAndClientInformation  w-full flex flex-wrap justify-between`}>
-        <CompanyInfo/>
-        <ClientInfo/>
+        <CompanyInfo />
+        <ClientInfo />
       </div>
       <div className="facBody">
         <div className="exucutiveDate">
@@ -130,7 +150,7 @@ const EditCopy: FC<EditCopyProps> = () => {
 
           <div style={{ backgroundColor: color }} className="tableHeader font-bold grid grid-cols-12">
             <div
-             className="reference border-[0.1rem] p-1 border-solid border-gray-900 col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1">
+              className="reference border-[0.1rem] p-1 border-solid border-gray-900 col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1">
               Reference</div>
             <div className="designation border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-5 md:col-span-4  lg:col-span-3">Designation</div>
             <div className="quantity border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1">Quantite</div>
@@ -187,7 +207,7 @@ const EditCopy: FC<EditCopyProps> = () => {
             </div>
             <div className="currencyChoiceCase my-[2rem]">
               <label htmlFor="currencySelect">Symbole, unité ou devise monétaire </label>
-              <select name="currencySelect" className='w-[8rem]' onChange={(e)=>setCurrency(e.target.value)} id="currencySelect">
+              <select name="currencySelect" className='w-[8rem]' onChange={(e) => setCurrency(e.target.value)} id="currencySelect">
                 <option value="usd">usd</option>
                 <option value="eur">eur</option>
                 <option value="cfa">cfa</option>

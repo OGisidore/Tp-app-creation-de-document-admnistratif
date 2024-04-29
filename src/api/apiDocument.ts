@@ -12,7 +12,7 @@ export const addItem = async (entityName : string , data: any) => {
 
         return {
             isSuccess: true,
-            message: ` ${data} added succesfully`
+            message: ` added succesfully`
         }
 
 

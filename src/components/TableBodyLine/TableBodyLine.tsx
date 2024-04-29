@@ -87,7 +87,7 @@ const withTVA = useSelector(getTvaOption)
         <input type="text" className=' border-none outline-none' name='reference' defaultValue={"0.00"} />
       </div>
       {
-        withTVA && <div className=" col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
+        withTVA.option && <div className=" col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
           <div className="lab">
             <label htmlFor="reference" className=" lg:hidden">Tva </label>
           </div>

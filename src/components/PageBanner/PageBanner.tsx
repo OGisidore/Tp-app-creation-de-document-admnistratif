@@ -20,7 +20,6 @@ const PageBanner : FC<PageBannerProps> = ({task}) =>{
 
 
     useEffect(() => {
-      window.scrollTo(0,0)
       const runLocalData = async () => {
 
       }

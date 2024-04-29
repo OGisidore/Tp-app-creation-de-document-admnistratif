@@ -2,14 +2,8 @@ import { EsperoDB } from "esperodb";
 
 const dataStructure: any = [
   {
-    withTVA: [
-      {
-        indexes: [],
-        primaryKey: 'withTVAKey',
-        type: 'boolean'
-      },
-    ],
-    Details: [
+    
+    design: [
       {
         indexes: [
           { _id: { unique: true } }
@@ -20,4 +14,4 @@ const dataStructure: any = [
   }
 ];
 
-export const db = new EsperoDB('Documents', dataStructure, 3);
+export const db = new EsperoDB('Documents', dataStructure, 5);

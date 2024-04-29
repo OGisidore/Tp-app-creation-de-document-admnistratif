@@ -13,7 +13,7 @@ root.render(
   <Provider store={store}>
     <div className=" w-full flex flex-col items-center">
       <div className="gradient"/>
-      <div className=" w-full xl:w-[60%] content flex justify-center">
+      <div className=" w-full xl:w-[65%] content flex justify-center">
          <App/>
       </div>
      

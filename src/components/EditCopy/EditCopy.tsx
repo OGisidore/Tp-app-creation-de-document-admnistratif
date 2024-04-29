@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes';
 import { getTvaOption } from '../../redux/selectors/selectors';
 import { FaPlus } from "react-icons/fa";
+import CompanyInfo from '../CompanyInfos/CompanyInfo';
+import ClientInfo from '../ClientInfo/ClientInfo';
 
 
 interface EditCopyProps {
@@ -85,7 +87,7 @@ const EditCopy: FC<EditCopyProps> = () => {
       <div className="header flex flex-col items-center">
         <div className="headerContent p-2 rounded-b-lg   bg-gray-200">
           <div className="modelSelect flex ">
-            <label htmlFor="modele">Modele de facture : </label>
+            <label htmlFor="modele">Modele de facture lola ko : </label>
             <select name="modele" defaultValue={"Entreprise avec TVA"} onChange={(e) => handleChange(e)} id="model">
               <option value="Entreprise avec TVA "> Entreprise avec TVA </option>
               <option value="Entreprise sans TVA "> Entreprise sans TVA </option>
@@ -108,96 +110,8 @@ const EditCopy: FC<EditCopyProps> = () => {
         </div>
       </div>
       <div className={`socityAndClientInformation  w-full flex flex-wrap justify-between`}>
-        <div className="socityInfo">
-          <form className='p-2' >
-            <div className="previousLogo">
-              <img src="" alt="" />
-            </div>
-            <div className="logo flex p-[0.2rem]">
-              <label htmlFor="logo"> Logo : </label>
-              <input type="file" name="logo" id="logo" />
-            </div>
-            <div className="socityName p-[0.2rem]">
-              <input type="text" name="socity_name" id="SName" placeholder='name' />
-            </div>
-            <div className="socityAdresse p-[0.2rem]">
-              <input type="text" name="socity_address" id="SAddress" placeholder='Address' />
-            </div>
-            <div className="socity_cityAndZIP_code p-[0.2rem]">
-              <input type="text" name="socity_ZIP" id="SZip" className="w-[20%] mr-1" placeholder='ZIP' />
-              <input type="text" name="socity_city" id="SCity" placeholder='city' />
-            </div>
-            <div className="socityCountry p-[0.2rem]">
-              <input type="text" name="Country" id="country" placeholder='Country' />
-            </div>
-            <div className="socityFax p-[0.2rem]">
-              <input type="text" name="fax" id="fax" placeholder='Fax' />
-            </div>
-            <div className="socityName p-[0.2rem]">
-              <input type="email" name="email" id="email" placeholder='email' />
-            </div>
-            <div className="socitySiret p-[0.2rem]">
-              <input type="text" name="Siret" id="siret" placeholder='SIREN/SIRET Numero' />
-            </div>
-            <div className="socityRCSVille p-[0.2rem]">
-              <input type="text" name="RCSVille" id="Rcs" placeholder='RCS Ville' />
-            </div>
-            <div className="socityCodeNaf p-[0.2rem]">
-              <input type="text" name="CodeNaf" id="CodeNaf" placeholder='Code NAF' />
-            </div>
-            <div className="socitTVA p-[0.2rem]">
-              <input type="text" name="TVA" id="TVA" placeholder='Numero de TVA' />
-            </div>
-
-          </form>
-        </div>
-        <div className="clientInfo">
-          <form className='p-3 flex items-stretch flex-col' >
-            <div className="facturNumero p-2 sm:w-[100%] md:w-[100%] lg:w-[80%]  self-end">
-              <div className="number">
-                <label htmlFor="numeroFacture">FACTURE N </label>
-                <input type="text" className="w-[50%]" name='numeroFacture' id='numb_facture' />
-              </div>
-              <div className="emissionDate pt-[0.5rem]">
-                <label htmlFor="date_ofEmission"> Date d'emission :  </label>
-                <input type="date" className="w-[50%]" name="date_ofEmission" id="date" />
-              </div>
-            </div>
-            <div className="clientDes w-[70%] sm:w-[100%] md:w-[100%] lg:w-[80%] flex flex-col items-end p-2 self-end">
-              <div className="all w-[100%]">
-                <div className="clientCode p-[0.2rem]">
-                  <input type="text" name="client_code" id="C_code" placeholder='Code client (facultatif)' />
-                </div>
-                <div className="clientFullname p-[0.2rem]">
-                  <input type="text" name="Client_Fullname" id="C_fullname" placeholder='Nom et Prenom du client' />
-                </div>
-                <div className="clientAddress p-[0.2rem]">
-                  <input type="text" name="Client_Address" id="client_address" placeholder='Address du client' />
-                </div>
-                <div className="client_cityAndZIP_code p-[0.2rem]">
-                  <input type="text" name="client_ZIP" id="C_Zip" className="w-[20%] mr-1" placeholder='code postal' />
-                  <input type="text" name="client_city" id="c_City" placeholder='ville' />
-                </div>
-
-                <div className="clientCountry p-[0.2rem]">
-                  <input type="text" name="Pays" id="Pays" placeholder='Pays' />
-                </div>
-                <div className="clientEmail p-[0.2rem]">
-                  <input type="text" name="phone" id="phone " placeholder='email et telephone' />
-                </div>
-                <div className="clientTva p-[0.2rem]">
-                  <input type="text" name="client_tva" id="c_tva" placeholder='Numero TVA  du client ( facultatif)' />
-                </div>
-              </div>
-
-            </div>
-            <div className="titleAdInput mt-2">
-              <p>Mettez ici un titre</p>
-              <input type="text" name='Title' id='titleAdd' className="w-[25%]" />
-            </div>
-
-          </form>
-        </div>
+        <CompanyInfo/>
+        <ClientInfo/>
       </div>
       <div className="facBody">
         <div className="exucutiveDate">
@@ -215,7 +129,9 @@ const EditCopy: FC<EditCopyProps> = () => {
         <div className="tables ">
 
           <div style={{ backgroundColor: color }} className="tableHeader font-bold grid grid-cols-12">
-            <div className="reference border-[0.1rem] p-1 border-solid border-gray-900 col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1">Reference</div>
+            <div
+             className="reference border-[0.1rem] p-1 border-solid border-gray-900 col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1">
+              Reference</div>
             <div className="designation border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-5 md:col-span-4  lg:col-span-3">Designation</div>
             <div className="quantity border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-2 md:col-span-4 lg:col-span-1">Quantite</div>
             <div className="Unite border-r-[0.1rem] border-y-[0.1rem] border-l-0 border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">Unité</div>

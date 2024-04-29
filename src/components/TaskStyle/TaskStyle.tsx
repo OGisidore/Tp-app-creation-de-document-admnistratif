@@ -7,6 +7,8 @@
 import React, { FC, useEffect } from 'react';
 import './TaskStyle.css';
 import { Design } from '../../model/design';
+import { useDispatch } from 'react-redux';
+import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes';
 
 
 interface TaskStyleProps {
@@ -16,8 +18,18 @@ interface TaskStyleProps {
 
 
 const TaskStyle : FC<TaskStyleProps> = ( {design}) =>{
+  const dispatch = useDispatch()
 
-
+const handleSetDesign =()=>{
+  console.log(design);
+  
+dispatch({
+  type : ADD_TO_STORAGE,
+  key : "Design",
+  unique : true,
+  payload : design
+})
+}
 
     useEffect(() => {
       window.scrollTo(0,0)
@@ -28,7 +40,7 @@ const TaskStyle : FC<TaskStyleProps> = ( {design}) =>{
     })
 
   return (
-    <div className={" w-6 cursor-pointer " + design.style + " h-10"}> 
+    <div onClick={handleSetDesign} className={" w-6 cursor-pointer p-8 " + design.style + " h-10"}> 
       
     </div>
   );

@@ -29,7 +29,7 @@ const EditCopy: FC<EditCopyProps> = () => {
   const dispatch = useDispatch()
   const [color, setColor] = useState<any>()
   const [defaultValues ,  setDefaultValue]=useState <string>("")
-  const [withTVA, setWithTVA] = useState<boolean | any>()
+  const [withTVA, setWithTVA] = useState<boolean>()
   const [currency, setCurrency] = useState<string>("usd")
   const [rows, setRows] = useState<Line[]>([{
     _id: generateID(),
@@ -58,7 +58,6 @@ const EditCopy: FC<EditCopyProps> = () => {
     console.log(option);
 
     if (option.trim() !== "Entreprise avec TVA") {
-      console.log("yes");
       setWithTVA(false)
     }else{
       setWithTVA(true)
@@ -111,7 +110,7 @@ const EditCopy: FC<EditCopyProps> = () => {
             <select name="modele" defaultValue={defaultValues} onChange={(e) => handleChange(e)} id="model">
               <option value="Entreprise avec TVA " > Entreprise avec TVA </option>
               <option value="Entreprise sans TVA "> Entreprise sans TVA </option>
-              <option value="Auto-entrepreneur "> Auto-entrepreneur </option>
+              <option value="Auto-entrepreneur"> Auto-entrepreneur </option>
             </select>
           </div>
           <div className="mentionSelect flex ">

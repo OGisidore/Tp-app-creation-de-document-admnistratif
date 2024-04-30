@@ -4,12 +4,12 @@
   App Name : E-commerce with React.Js
   Created At : 28/04/2024 11:35:42
 */
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import './TableBodyLine.css';
 
 import { tvaPercent, unitValue } from '../../api/data';
-import { useSelector } from 'react-redux';
-import { getTvaOption } from '../../redux/selectors/selectors';
+
+import { getItem } from '../../services/localStorage';
 
 
 interface TableBodyLineProps {
@@ -20,12 +20,17 @@ interface TableBodyLineProps {
 
 
 const TableBodyLine: FC<TableBodyLineProps> = () => {
+const [withTVA , setWithTVA]=useState<any>()
 
 
-
-const withTVA = useSelector(getTvaOption)
   useEffect(() => {
     const runLocalData = async () => {
+      const withTva = await getItem("withTVA")
+      console.log(withTva);
+      
+      setWithTVA(withTva.option)
+      console.log(withTVA);
+      
 
     }
     runLocalData()
@@ -87,7 +92,7 @@ const withTVA = useSelector(getTvaOption)
         <input type="text" className=' border-none outline-none' name='reference' defaultValue={"0.00"} />
       </div>
       {
-        withTVA.option && <div className=" col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
+        withTVA && <div className=" col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4 p-1 border-r-[0.1rem] border-y-0 border-l-0 border-solid border-gray-900">
           <div className="lab">
             <label htmlFor="reference" className=" lg:hidden">Tva </label>
           </div>

@@ -5,7 +5,7 @@ import { StorageAction } from "../actions/types";
 
 const storage =getItem("storage ")
 const initState: any = storage ? storage : {};
-export const storageReducers = (state = initState,
+export const storageReducers = async (state = initState,
     action: StorageAction = { type: null, key: null, payload: null }) => {
     switch (action.type) {
         case ADD_TO_STORAGE:
@@ -38,7 +38,7 @@ export const storageReducers = (state = initState,
 
 
             }
-            setItem(action.key!, action.payload)
+          await  setItem(action.key!, action.payload)
             return { ...state }
 
             break;
@@ -61,7 +61,7 @@ export const storageReducers = (state = initState,
                 delete state[action.key]
             }
                 }
-               removeItem(action.key!)
+              await removeItem(action.key!)
             return { ...state }
             break;
 

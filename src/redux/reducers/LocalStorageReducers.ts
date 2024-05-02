@@ -38,7 +38,9 @@ export const storageReducers = async (state = initState,
 
 
             }
-          await  setItem(action.key!, action.payload)
+            console.log(action.payload);
+            
+            setItem(action.key!, action.payload)
             return { ...state }
 
             break;

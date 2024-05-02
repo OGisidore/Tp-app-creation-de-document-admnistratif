@@ -102,7 +102,7 @@ const EditCopy: FC<EditCopyProps> = () => {
   }, [])
 
   return (
-    <div className={"EditCopy w-[98%l px-2 mt-2" + design?.style}>
+    <div className={"EditCopy w-[98%l px-2 mt-2" + design?.style}> 
       <div className="header flex flex-col items-center">
         <div className="headerContent p-2 rounded-b-lg   bg-gray-200">
           <div className="modelSelect flex ">

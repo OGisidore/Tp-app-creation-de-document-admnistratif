@@ -24,14 +24,7 @@ interface EditCopyProps {}
 const EditCopy: FC<EditCopyProps> = () => {
   // const dispatch = useDispatch()
   const [duplicata, setDuplicata] = useState<boolean>(false)
-  const [color, setColor] = useState<any>()
-  const [defaultValues ,  setDefaultValue]=useState <string>("")
-  const [withTVA, setWithTVA] = useState<boolean>()
-  const [currency, setCurrency] = useState<string>("usd")
-  const [rows, setRows] = useState<Line[]>([{
-    _id: generateID(),
-    name: ""
-  }])
+  const [color, setColor] = useState<any>()    
   const [withTVA, setWithTVA] = useState<boolean>(true)
   const [rows, setRows] = useState<Line[]>([
     {
@@ -62,8 +55,6 @@ const EditCopy: FC<EditCopyProps> = () => {
   const handleChange = async (e: any) => {
     const option: string = e.target.value
     console.log(option)
-
-    if (option.trim() !== "Entreprise avec TVA") {
     if (option.trim() === 'Entreprise avec TVA') {
       setWithTVA(true)
     } else {
@@ -99,16 +90,10 @@ const EditCopy: FC<EditCopyProps> = () => {
     setDuplicata(!duplicata)
   }
   return (
-    <div className={"EditCopy w-[98%l px-2 mt-2" + design?.style}> 
     <div className={'EditCopy w-[98%l m-2 px-2 mt-2' + design?.style}>
       <div className="header flex flex-col items-center">
         <div className="headerContent p-2 rounded-b-lg   bg-gray-200">
           <div className="modelSelect flex ">
-            <label htmlFor="modele">Modele de facture lola ko : </label>
-            <select name="modele" defaultValue={defaultValues} onChange={(e) => handleChange(e)} id="model">
-              <option value="Entreprise avec TVA " > Entreprise avec TVA </option>
-              <option value="Entreprise sans TVA "> Entreprise sans TVA </option>
-              <option value="Auto-entrepreneur"> Auto-entrepreneur </option>
             <label htmlFor="modele">Modele de {slug} : </label>
             <select
               name="modele"

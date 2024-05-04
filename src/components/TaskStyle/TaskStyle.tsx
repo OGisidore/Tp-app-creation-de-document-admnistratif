@@ -27,7 +27,7 @@ const handleSetDesign = async ()=>{
   
 dispatch({
   type : ADD_TO_STORAGE,
-  key : "Design",
+  key : "design",
   unique : true,
   payload : design
 })

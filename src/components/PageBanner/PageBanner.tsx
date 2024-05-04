@@ -20,7 +20,7 @@ const PageBanner: FC<PageBannerProps> = ({ task }) => {
   })
 
   return (
-    <div className="PageBanner sticky top-0 bg-[rgb(255,115,0)] w-full">
+    <div className="PageBanner sticky z-10 top-0 bg-[rgb(255,115,0)] w-full">
       <div className="page flex justify-between items-center px-6">
         <div className="PageTitle">
           <h1>{task.Title}</h1>

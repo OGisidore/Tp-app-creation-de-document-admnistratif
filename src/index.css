@@ -13,6 +13,17 @@ a {
 text-decoration: none;
 color: #fff;
 }
+.text-stroke{
+  top: 20%;
+  right:  40%;
+  transform: rotate(-30deg);
+  color: var(--ColorThird);
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: .1rem;
+  font-size: 4rem;
+  text-transform: uppercase;
+  font-family: sans-serif;
+}
 
 
 .main {

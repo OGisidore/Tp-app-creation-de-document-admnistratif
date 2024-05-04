@@ -30,12 +30,12 @@ const TaskPage: FC<TaskPageProps> = () => {
     // window.scrollTo(0, 0)
     const runLocalData = async () => {
       console.log(taskItem)
-      const designData = await getItem('Design')
+      const designData = await getItem('design')
       console.log(designData)
 
       dispatch({
         type: ADD_TO_STORAGE,
-        key: 'Design',
+        key: 'design',
         unique: true,
         payload: designData,
       })

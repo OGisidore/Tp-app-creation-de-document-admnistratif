@@ -9,13 +9,13 @@ import './EditCopy.css'
 import { generateID } from '../../helpers/utiles'
 import { Line } from '../../model/Line'
 import TableBodyLine from '../TableBodyLine/TableBodyLine'
-import { useSelector } from 'react-redux'
-import { getDesign } from '../../redux/selectors/selectors'
+
 import CompanyInfo from '../CompanyInfos/CompanyInfo'
 import ClientInfo from '../ClientInfo/ClientInfo'
 import { Design } from '../../model/design'
 import SubTotalBox from '../SubTotalBox/SubTotalBox'
 import { useParams } from 'react-router-dom'
+import { getItem } from '../../services/localStorage'
 // import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes';
 // import { getItem } from '../../services/localStorage';
 
@@ -35,7 +35,7 @@ const EditCopy: FC<EditCopyProps> = () => {
 
   const { slug } = useParams()
 
-  const design: Design = useSelector(getDesign)
+  const design: Design = getItem("design")
   console.log(design)
 
   const handleAddLine = () => {
@@ -82,10 +82,7 @@ const EditCopy: FC<EditCopyProps> = () => {
     }
     runLocalData()
   }, [])
-  const handleSetDuplicata = (e: any) => {
-    console.log(e.target)
-
-    console.log(duplicata)
+  const handleSetDuplicata = () => {
 
     setDuplicata(!duplicata)
   }
@@ -122,7 +119,7 @@ const EditCopy: FC<EditCopyProps> = () => {
               <div className="duplicata flex">
                 <input
                   type="checkbox"
-                  onChange={(e) => handleSetDuplicata(e)}
+                  onChange={ handleSetDuplicata}
                   name="duplicata"
                   id="duplicata"
                 />
@@ -133,9 +130,9 @@ const EditCopy: FC<EditCopyProps> = () => {
         </div>
       </div>
       <div
-        className={`socityAndClientInformation  w-full flex flex-wrap  justify-between`}
+        className={`socityAndClientInformation  w-full flex flex-wrap relative justify-between`}
       >
-        {duplicata && <div className="absolute "> lola </div>}
+        {duplicata && <div className="absolute text-stroke"> duplicata </div>}
         <CompanyInfo />
         <ClientInfo />
       </div>

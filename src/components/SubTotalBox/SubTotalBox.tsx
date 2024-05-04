@@ -12,11 +12,12 @@ import { discountRates, limitoptions, paymentMode } from '../../api/data';
 
 
 interface SubTotalBoxProps {
-  handleAddLine: () => void
+  handleAddLine: () => void,
+  withTva : boolean
 
 }
 
-const SubTotalBox: FC<SubTotalBoxProps> = ({ handleAddLine }) => {
+const SubTotalBox: FC<SubTotalBoxProps> = ({ handleAddLine, withTva }) => {
   const [currency, setCurrency] = useState<string>("usd")
   const [discountCase, setDiscountCase] = useState<boolean>(false)
   const [depositCase, setDepositCase] = useState<boolean>(false)
@@ -194,7 +195,7 @@ const SubTotalBox: FC<SubTotalBoxProps> = ({ handleAddLine }) => {
 
           </div>
           {
-            // withTVA && <div className=" p-1  col-span-2 border-0 border-t-[.1rem] border-solid border-gray-950"></div>
+             withTva && <div className=" p-1  col-span-2 border-0 border-t-[.1rem] border-solid border-gray-950"></div>
           }
         </div>
         {

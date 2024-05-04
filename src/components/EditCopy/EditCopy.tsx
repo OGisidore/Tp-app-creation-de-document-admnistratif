@@ -119,7 +119,7 @@ const EditCopy: FC<EditCopyProps> = () => {
               <label htmlFor="mention">Mentions à afficher  : </label>
               <div className="options flex ">
                 <div className="proforma flex">
-                  <input type="checkbox" name="proforma" onChange={handleSetProforma}  id="proforma" />
+                  <input type="checkbox" name="proforma" onChange={handleSetProforma} id="proforma" />
                   <label htmlFor="proforma">proforma</label>
                 </div>
                 <div className="duplicata flex">
@@ -192,11 +192,14 @@ const EditCopy: FC<EditCopyProps> = () => {
             <div className="HtAmount border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">
               Montant HT
             </div>
-            {withTVA && (
+            {withTVA ?
               <div className="tva border-r-[0.1rem] border-y-[0.1rem] border-l-0 p-1 border-solid border-gray-900 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">
                 TVA %
               </div>
-            )}
+              :
+             <div className=" bg-white"></div>
+            }
+            <div className=" bg-white"></div>
           </div>
 
           {rows.map((row: Line) => {
@@ -252,7 +255,7 @@ const EditCopy: FC<EditCopyProps> = () => {
             )
           })}
         </div>
-        <SubTotalBox handleAddLine={handleAddLine} />
+        <SubTotalBox withTva={withTVA} handleAddLine={handleAddLine} />
 
         <div className="infosupp">
           <div className="subT">infos supplementaire</div>

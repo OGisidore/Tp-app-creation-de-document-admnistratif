@@ -8,9 +8,11 @@ import React, { FC, useEffect } from 'react'
 import './ClientInfo.css'
 import { useParams } from 'react-router-dom'
 
-interface ClientInfoProps {}
+interface ClientInfoProps {
+  proforma : boolean
+}
 
-const ClientInfo: FC<ClientInfoProps> = () => {
+const ClientInfo: FC<ClientInfoProps> = ({proforma}) => {
   const { slug } = useParams()
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const ClientInfo: FC<ClientInfoProps> = () => {
       <form className="p-3 flex items-stretch flex-col">
         <div className="facturNumero p-2 sm:w-[100%] md:w-[100%] lg:w-[80%]  self-end">
           <div className="number">
-            <label htmlFor="numeroFacture">{slug?.toUpperCase()} N </label>
+            <label htmlFor="numeroFacture">{slug?.toUpperCase()} {proforma && "PROFORMA"} N </label>
             <input
               type="text"
               className="w-[50%]"

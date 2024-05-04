@@ -74,10 +74,10 @@ const uniteOptions = [
     "A", "G", "H", "Img", "J", "Kg", "Km", "L", "lot", "M", "M2", "M3", "ML", "Min", "P", "Pcs", "sec", "T"
 ];
 
-export const unitValue =uniteOptions.map((value=>{
+export const unitValue = uniteOptions.map((value => {
     return {
-        _id : generateID,
-        value : value
+        _id: generateID,
+        value: value
     }
 }))
 
@@ -93,11 +93,59 @@ const tvaOptions = [
 export const tvaPercent = tvaOptions.map((value) => {
     return {
         _id: generateID(),
-        value: value 
+        value: value
     };
 });
-console.log({unitValue});
+console.log({ unitValue });
 
-console.log({tvaPercent});
+console.log({ tvaPercent });
+
+export const limitoptions = [
+    "Ne pas préciser",
+    "À la réception",
+    "À la commande",
+    "Fin de mois",
+    "15 jours",
+    "20 jours",
+    "30 jours",
+    "45 jours",
+    "60 jours",
+    "90 jours",
+    "30 jours fin de mois",
+    "45 jours fin de mois",
+    "60 jours fin de mois",
+    "90 jours fin de mois",
+    "Autre délai",
+    "Saisir une date"
+];
+export const paymentMode = [
+    "Ne pas préciser",
+    "Carte bancaire",
+    "Chèque",
+    "Chèque Emploi Service Universel (CESU)",
+    "Chèque vacances",
+    "Espèces",
+    "Mandat cash",
+    "Virement bancaire",
+    "Prélèvement",
+    "LCR Lettre de Change Relevé",
+    "Traite",
+    "PayPal",
+    "Autre"
+];
 
 
+export var discountRates:any[] = []
+const generdiscountRate = () => {
+    for (let index = 1; index < 100; index++) {
+        const element = index;
+        discountRates.push({
+            _id : generateID(),
+            value : element + "%"
+        })
+
+    }
+}
+generdiscountRate()
+
+console.log(discountRates);

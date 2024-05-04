@@ -19,12 +19,13 @@ import { getItem } from '../../services/localStorage'
 // import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes';
 // import { getItem } from '../../services/localStorage';
 
-interface EditCopyProps {}
+interface EditCopyProps { }
 
 const EditCopy: FC<EditCopyProps> = () => {
   // const dispatch = useDispatch()
   const [duplicata, setDuplicata] = useState<boolean>(false)
-  const [color, setColor] = useState<any>()    
+  const [proforma, setProforma] = useState<boolean>(false)
+  const [color, setColor] = useState<any>()
   const [withTVA, setWithTVA] = useState<boolean>(true)
   const [rows, setRows] = useState<Line[]>([
     {
@@ -86,6 +87,10 @@ const EditCopy: FC<EditCopyProps> = () => {
 
     setDuplicata(!duplicata)
   }
+  const handleSetProforma = () => {
+
+    setProforma(!proforma)
+  }
   return (
     <div className={'EditCopy w-[98%l m-2 px-2 mt-2' + design?.style}>
       <div className="header flex flex-col items-center">
@@ -109,24 +114,27 @@ const EditCopy: FC<EditCopyProps> = () => {
               <option value="Auto-entrepreneur "> Auto-entrepreneur </option>
             </select>
           </div>
-          <div className="mentionSelect flex ">
-            <label htmlFor="mention">Modele de {slug} : </label>
-            <div className="options flex ">
-              <div className="proforma flex">
-                <input type="checkbox" name="proforma" id="proforma" />
-                <label htmlFor="proforma">proforma</label>
-              </div>
-              <div className="duplicata flex">
-                <input
-                  type="checkbox"
-                  onChange={ handleSetDuplicata}
-                  name="duplicata"
-                  id="duplicata"
-                />
-                <label htmlFor="duplicata">duplicata</label>
+          {
+            slug === "fature" && <div className="mentionSelect flex ">
+              <label htmlFor="mention">Mentions à afficher  : </label>
+              <div className="options flex ">
+                <div className="proforma flex">
+                  <input type="checkbox" name="proforma" onChange={handleSetProforma}  id="proforma" />
+                  <label htmlFor="proforma">proforma</label>
+                </div>
+                <div className="duplicata flex">
+                  <input
+                    type="checkbox"
+                    onChange={handleSetDuplicata}
+                    name="duplicata"
+                    id="duplicata"
+                  />
+                  <label htmlFor="duplicata">duplicata</label>
+                </div>
               </div>
             </div>
-          </div>
+          }
+
         </div>
       </div>
       <div
@@ -134,7 +142,7 @@ const EditCopy: FC<EditCopyProps> = () => {
       >
         {duplicata && <div className="absolute text-stroke"> duplicata </div>}
         <CompanyInfo />
-        <ClientInfo />
+        <ClientInfo proforma={proforma} />
       </div>
       <div className="facBody">
         <div className="exucutiveDate">

@@ -46,7 +46,7 @@ const ArticleTotalAmountLine : FC<ArticleTotalAmountLineProps> = ({withTVA}) =>{
           type="text"
           className=" border-none  font-bold"
           name="reference"
-          value={'0.00'}
+          defaultValue={'0.00'}
         />
     </div>
     {withTVA && (

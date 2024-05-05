@@ -1,8 +1,11 @@
 import {  tasks } from "../api/data"
+import { CalculateHTAmount } from "../api/utilities";
 import TaskCart from "../components/TaskCart/TaskCart"
 import { Task } from "../model/Task"
 
 export const Home: React.FC = () => {
+  console.log(CalculateHTAmount(10 , 10 , 10));
+
   return (
     <div className="  flex flex-col items-center w-full  main">
       <div className="illustration h-80 flex gap-3 justify-center">

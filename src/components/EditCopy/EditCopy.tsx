@@ -14,18 +14,15 @@ import CompanyInfo from '../CompanyInfos/CompanyInfo'
 import ClientInfo from '../ClientInfo/ClientInfo'
 import SubTotalBox from '../SubTotalBox/SubTotalBox'
 import { useParams } from 'react-router-dom'
-// import { getItem } from '../../services/localStorage'
 import ArticlesubtitleLine from '../Article_subtitleLine/Article_subtitleLine'
 import ArticleTotalAmountLine from '../Article_TotalAmountLine/Article_TotalAmountLine'
 import { getDesign } from '../../redux/selectors/selectors'
 import { useSelector } from 'react-redux'
-// import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes';
-// import { getItem } from '../../services/localStorage';
+
 
 interface EditCopyProps { }
 
 const EditCopy: FC<EditCopyProps> = () => {
-  // const dispatch = useDispatch()
   const [duplicata, setDuplicata] = useState<boolean>(false)
   const [proforma, setProforma] = useState<boolean>(false)
   const [color, setColor] = useState<any>()
@@ -41,8 +38,8 @@ const EditCopy: FC<EditCopyProps> = () => {
 
   const { slug } = useParams()
 
- 
-  
+
+
 
   const handleAddLine = () => {
     setRows([
@@ -55,9 +52,13 @@ const EditCopy: FC<EditCopyProps> = () => {
       },
     ])
   }
+
+  /******************************************** */
+
   const handleRemoveLine = (e: any, id: string) => {
     setRows(rows.filter((row) => row._id !== id))
   }
+  /******************************************** */
 
   const handleChange = async (e: any) => {
     const option: string = e.target.value
@@ -72,23 +73,28 @@ const EditCopy: FC<EditCopyProps> = () => {
 
   const design = useSelector(getDesign)
   console.log(design);
-  
+
 
   useEffect(() => {
-    // window.scrollTo(0, 0)
     const runLocalData = async () => {
-      
+
     }
     runLocalData()
   }, [])
-  const handleSetDuplicata = () => {
 
+  /******************************************** */
+
+  const handleSetDuplicata = () => {
     setDuplicata(!duplicata)
   }
-  const handleSetProforma = () => {
 
+  /******************************************** */
+  const handleSetProforma = () => {
     setProforma(!proforma)
   }
+
+  /******************************************** */
+
   const handleSetSubTitle = (id: string) => {
 
     const updateRow = rows.map((row) => {
@@ -101,18 +107,19 @@ const EditCopy: FC<EditCopyProps> = () => {
 
     setRows(updateRow)
   }
-  const handleSetTotalAmount = (id: string) => {
+  /******************************************** */
 
+  const handleSetTotalAmount = (id: string) => {
     const updateRow = rows.map((row) => {
       if (row._id === id) {
         return { ...row, setTotal_amount: !row.setTotal_amount }
-
       }
       return row
     })
-
     setRows(updateRow)
   }
+
+
   return (
     <div className={'EditCopy w-[98%l m-2 px-2 mt-2' + design?.style}>
       <div className="header flex flex-col items-center">
@@ -228,7 +235,7 @@ const EditCopy: FC<EditCopyProps> = () => {
             return (
               <div key={row._id}>
                 {
-                  row.setSub_title && <ArticlesubtitleLine withTVA={withTVA}/>
+                  row.setSub_title && <ArticlesubtitleLine withTVA={withTVA} />
                 }
 
                 <div className="tablesBody mt-2 lg:mt-0 border-solid border-gray-950 border-1 lg:border-0 grid grid-cols-12"
@@ -257,7 +264,8 @@ const EditCopy: FC<EditCopyProps> = () => {
                             type="checkbox"
                             className="w-[1rem]"
                             name="summ"
-                            onChange={()=>handleSetTotalAmount(row._id)}
+
+                            onChange={() => handleSetTotalAmount(row._id)}
                             id=""
                           />
                         </div>

@@ -1,11 +1,14 @@
-import { getItem, removeItem, setItem } from "../../services/localStorage";
+import { addItem } from "../../api/apiDocument";
+import { getItem } from "../../services/localStorage";
 import { ADD_TO_STORAGE, REMOVE_FROM_STORAGE } from "../actions/actionTypes";
 import { StorageAction } from "../actions/types";
 
 
-const storage =getItem("storage ")
+const storage = getItem("storage")
+console.log(storage);
+
 const initState: any = storage ? storage : {};
-export const storageReducers = async (state = initState,
+export const storageReducers =  (state = initState,
     action: StorageAction = { type: null, key: null, payload: null }) => {
     switch (action.type) {
         case ADD_TO_STORAGE:
@@ -39,9 +42,10 @@ export const storageReducers = async (state = initState,
 
             }
             console.log(action.payload);
+            addItem(action.key!, action.payload,action.unique) 
+            console.log({...state});
             
-            setItem(action.key!, action.payload)
-            return { ...state }
+            return {...state }
 
             break;
         case REMOVE_FROM_STORAGE:
@@ -63,7 +67,7 @@ export const storageReducers = async (state = initState,
                 delete state[action.key]
             }
                 }
-              await removeItem(action.key!)
+            //   await removeItem(action.key!)
             return { ...state }
             break;
 

@@ -4,19 +4,30 @@
   App Name : E-commerce with React.Js
   Created At : 28/04/2024 11:35:42
 */
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import './TableBodyLine.css'
 
 import { tvaPercent, unitValue } from '../../api/data'
 // import { getItem } from '../../services/localStorage'
 
 interface TableBodyLineProps {
+
   withTVA: boolean
 }
 
-const TableBodyLine: FC<TableBodyLineProps> = ({ withTVA }) => {
+const TableBodyLine: FC<TableBodyLineProps> = ({ withTVA, }) => {
+  const [value, setValue] = useState('');
+  const [height, setHeight] = useState('auto');
+
+  const handleChange = (event: any) => {
+    setValue(event.target.value);
+    const { scrollHeight, clientHeight } = event.target;
+    const newHeight = scrollHeight > clientHeight ? `${scrollHeight}px` : height;
+    setHeight(newHeight);
+  };
   useEffect(() => {
-    const runLocalData = async () => {}
+    const runLocalData = async () => { }
+
 
     runLocalData()
   })
@@ -37,9 +48,13 @@ const TableBodyLine: FC<TableBodyLineProps> = ({ withTVA }) => {
             Desigation
           </label>
         </div>
+
         <textarea
           name="designation"
-          className="w[98%]"
+          placeholder='designation'
+          value={value}
+          onChange={(e) => handleChange(e)}
+          style={{ height }}
           id="designation"
           rows={1}
         ></textarea>
@@ -96,9 +111,9 @@ const TableBodyLine: FC<TableBodyLineProps> = ({ withTVA }) => {
         </div>
         <input
           type="text"
-          className=" border-none outline-none"
+          className=" border-none"
           name="reference"
-          defaultValue={'0.00'}
+          value={'0.00'}
         />
       </div>
       {withTVA && (

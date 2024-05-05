@@ -96,9 +96,7 @@ export const tvaPercent = tvaOptions.map((value) => {
         value: value
     };
 });
-console.log({ unitValue });
 
-console.log({ tvaPercent });
 
 export const limitoptions = [
     "Ne pas préciser",
@@ -148,4 +146,3 @@ const generdiscountRate = () => {
 }
 generdiscountRate()
 
-console.log(discountRates);

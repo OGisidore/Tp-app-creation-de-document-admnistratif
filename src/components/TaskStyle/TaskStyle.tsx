@@ -9,7 +9,6 @@ import './TaskStyle.css';
 import { Design } from '../../model/design';
 import { useDispatch } from 'react-redux';
 import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes';
-import { addItem } from '../../api/apiDocument';
 
 
 interface TaskStyleProps {
@@ -30,9 +29,7 @@ dispatch({
   key : "design",
   unique : true,
   payload : design
-})
-await addItem("design", design)
-}
+})}
 
     useEffect(() => {
       // window.scrollTo(0,0)

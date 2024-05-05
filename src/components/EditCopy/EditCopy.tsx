@@ -12,10 +12,13 @@ import TableBodyLine from '../TableBodyLine/TableBodyLine'
 
 import CompanyInfo from '../CompanyInfos/CompanyInfo'
 import ClientInfo from '../ClientInfo/ClientInfo'
-import { Design } from '../../model/design'
 import SubTotalBox from '../SubTotalBox/SubTotalBox'
 import { useParams } from 'react-router-dom'
-import { getItem } from '../../services/localStorage'
+// import { getItem } from '../../services/localStorage'
+import ArticlesubtitleLine from '../Article_subtitleLine/Article_subtitleLine'
+import ArticleTotalAmountLine from '../Article_TotalAmountLine/Article_TotalAmountLine'
+import { getDesign } from '../../redux/selectors/selectors'
+import { useSelector } from 'react-redux'
 // import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes';
 // import { getItem } from '../../services/localStorage';
 
@@ -30,56 +33,51 @@ const EditCopy: FC<EditCopyProps> = () => {
   const [rows, setRows] = useState<Line[]>([
     {
       _id: generateID(),
+      setSub_title: false,
+      setTotal_amount: false,
       name: '',
     },
   ])
 
   const { slug } = useParams()
 
-  const design: Design = getItem("design")
-  console.log(design)
+ 
+  
 
   const handleAddLine = () => {
     setRows([
       ...rows,
       {
         _id: generateID(),
+        setSub_title: false,
+        setTotal_amount: false,
         name: '',
       },
     ])
   }
   const handleRemoveLine = (e: any, id: string) => {
-    console.log('hello')
     setRows(rows.filter((row) => row._id !== id))
   }
 
   const handleChange = async (e: any) => {
     const option: string = e.target.value
-    console.log(option)
     if (option.trim() === 'Entreprise avec TVA') {
       setWithTVA(true)
     } else {
       setWithTVA(false)
     }
-    console.log(withTVA)
 
-    // dispatch({
-    //   type: ADD_TO_STORAGE,
-    //   key: "withTVA",
-    //   unique: true,
-    //   payload: {
-    //     option : withTVA,
-    //     value : option
-    //   }
-    // })
+
   }
 
-  // const withTVA = useSelector(getTvaOption)
+  const design = useSelector(getDesign)
+  console.log(design);
+  
 
   useEffect(() => {
     // window.scrollTo(0, 0)
     const runLocalData = async () => {
-      console.log(duplicata)
+      
     }
     runLocalData()
   }, [])
@@ -90,6 +88,30 @@ const EditCopy: FC<EditCopyProps> = () => {
   const handleSetProforma = () => {
 
     setProforma(!proforma)
+  }
+  const handleSetSubTitle = (id: string) => {
+
+    const updateRow = rows.map((row) => {
+      if (row._id === id) {
+        return { ...row, setSub_title: !row.setSub_title }
+
+      }
+      return row
+    })
+
+    setRows(updateRow)
+  }
+  const handleSetTotalAmount = (id: string) => {
+
+    const updateRow = rows.map((row) => {
+      if (row._id === id) {
+        return { ...row, setTotal_amount: !row.setTotal_amount }
+
+      }
+      return row
+    })
+
+    setRows(updateRow)
   }
   return (
     <div className={'EditCopy w-[98%l m-2 px-2 mt-2' + design?.style}>
@@ -197,64 +219,75 @@ const EditCopy: FC<EditCopyProps> = () => {
                 TVA %
               </div>
               :
-             <div className=" bg-white"></div>
+              <div className=" bg-white"></div>
             }
             <div className=" bg-white"></div>
           </div>
 
           {rows.map((row: Line) => {
             return (
-              <div
-                key={row._id}
-                className="tablesBody mt-2 lg:mt-0 border-solid border-gray-950 border-1 lg:border-0 grid grid-cols-12"
-              >
-                <TableBodyLine withTVA={withTVA} />
-                <div className="bg-gray-100 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">
-                  <div className="action flex justify-between px-1 font-bold  bg-gray-100">
-                    <div className="titles">
-                      <div className="title p-0 m-0">
-                        <label htmlFor="addT" className=" text-blue-600">
-                          T
-                        </label>
-                        <input
-                          type="checkbox"
-                          className="w-[1rem]"
-                          name="Tit"
-                          id=""
-                        />
+              <div key={row._id}>
+                {
+                  row.setSub_title && <ArticlesubtitleLine withTVA={withTVA}/>
+                }
+
+                <div className="tablesBody mt-2 lg:mt-0 border-solid border-gray-950 border-1 lg:border-0 grid grid-cols-12"
+                >
+                  <TableBodyLine withTVA={withTVA} />
+                  <div className="bg-gray-100 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">
+                    <div className="action flex justify-between px-1 font-bold  bg-gray-100">
+                      <div className="titles">
+                        <div className="title p-0 m-0">
+                          <label htmlFor="addT" className=" text-blue-600">
+                            T
+                          </label>
+                          <input
+                            type="checkbox"
+                            className="w-[1rem]"
+                            name="Tit"
+                            onChange={() => handleSetSubTitle(row._id)}
+                            id=""
+                          />
+                        </div>
+                        <div className="sum p-0 m-0">
+                          <label htmlFor="sumb" className=" text-orange-800">
+                            =
+                          </label>
+                          <input
+                            type="checkbox"
+                            className="w-[1rem]"
+                            name="summ"
+                            onChange={()=>handleSetTotalAmount(row._id)}
+                            id=""
+                          />
+                        </div>
                       </div>
-                      <div className="sum p-0 m-0">
-                        <label htmlFor="sumb" className=" text-orange-800">
-                          =
-                        </label>
-                        <input
-                          type="checkbox"
-                          className="w-[1rem]"
-                          name="summ"
-                          id=""
-                        />
-                      </div>
-                    </div>
-                    <div className="AddL">
-                      <div
-                        onClick={(e) => handleRemoveLine(e, row._id)}
-                        className="remve cursor-pointer text-red-700 "
-                      >
-                        x
-                      </div>
-                      <div
-                        onClick={handleAddLine}
-                        className="remve cursor-pointer text-green-800 "
-                      >
-                        +
+                      <div className="AddL">
+                        <div
+                          onClick={(e) => handleRemoveLine(e, row._id)}
+                          className="remve cursor-pointer text-red-700 "
+                        >
+                          x
+                        </div>
+                        <div
+                          onClick={handleAddLine}
+                          className="remve cursor-pointer text-green-800 "
+                        >
+                          +
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                {
+                  row.setTotal_amount && <ArticleTotalAmountLine withTVA={withTVA} />
+                }
               </div>
+
             )
           })}
-        </div>
+        </div >
         <SubTotalBox withTva={withTVA} handleAddLine={handleAddLine} />
 
         <div className="infosupp">

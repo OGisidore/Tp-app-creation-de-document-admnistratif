@@ -3,10 +3,23 @@
 import { db } from "./dataBase";
 
 /************************** fonction d'ajout de todo ****************** */
-export const addItem = async (entityName : string , data: any) => {
+export const addItem = async (entityName : string , data: any , unique?:boolean) => {
     console.log("we are");
     
     try {
+        if (unique) {
+            console.log("yes");
+            
+            const entityData = await db.getAllData(entityName)
+            if (entityData.length > 0) {
+                entityData.forEach(async(d:any)=>{
+                     await db.deleteData(entityName, d._id)
+                })
+                
+            }
+            
+        }
+
         await db.addData(entityName, data)
         console.log("we are");
 

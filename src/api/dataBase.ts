@@ -6,7 +6,7 @@ const dataStructure: any = [
     design: [
       {
         indexes: [
-          { _id: { unique: true } }
+          {_id: { unique: true } }
         ],
         primaryKey: '_id'
       },
@@ -14,4 +14,4 @@ const dataStructure: any = [
   }
 ];
 
-export const db = new EsperoDB('Documents', dataStructure, 5);
+export const db = new EsperoDB('Documents', dataStructure, 1);

@@ -13,35 +13,37 @@ import { Task } from '../../model/Task'
 import PageBanner from '../../components/PageBanner/PageBanner'
 import TaskStyleList from '../../components/TaskStyleList/TaskStyleList'
 import EditCopy from '../../components/EditCopy/EditCopy'
-// import { getAllItems } from '../../api/apiDocument';
-// import { useDispatch } from 'react-redux'
-// import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes'
-// import { getItem } from '../../services/localStorage'
+import { getAllItems } from '../../api/apiDocument'
+import { useDispatch } from 'react-redux'
+import { ADD_TO_STORAGE } from '../../redux/actions/actionTypes'
+import { Design } from '../../model/design'
+
 
 interface TaskPageProps {}
 
 const TaskPage: FC<TaskPageProps> = () => {
-  // const [state, setState] = useState<any>(null)
   const { slug } = useParams()
   const taskItem: Task = tasks.filter((task: Task) => task.slug === slug)[0]
+  
 
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
+  
   useEffect(() => {
-    // window.scrollTo(0, 0)
     const runLocalData = async () => {
-      // console.log(taskItem)
-      // const designData = await getItem('design')
-      // console.log(designData)
-
-      // dispatch({
-      //   type: ADD_TO_STORAGE,
-      //   key: 'design',
-      //   unique: true,
-      //   payload: designData,
-      // })
-    }
+      const designData = await getAllItems('design');
+      if (designData.results && designData.results.length > 0) {
+        const result = designData.results[0];
+        dispatch({
+          type: ADD_TO_STORAGE,
+          key: 'design',
+          unique: true,
+          payload: result as Design,
+        });
+      }
+    
+  };
     runLocalData()
-  })
+  },[dispatch])
 
   return (
     <div className="TaskPage w-full  main">

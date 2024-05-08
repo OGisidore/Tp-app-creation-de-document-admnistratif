@@ -7,6 +7,8 @@
 import React, { FC, useEffect } from 'react'
 import './ClientInfo.css'
 import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { UPDATE_CLIENT_INFO } from '../../redux/actions/actionTypes'
 
 interface ClientInfoProps {
   proforma : boolean
@@ -14,12 +16,24 @@ interface ClientInfoProps {
 
 const ClientInfo: FC<ClientInfoProps> = ({proforma}) => {
   const { slug } = useParams()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const runLocalData = async () => {}
     runLocalData()
   })
+  const handleChange = (e: any )=>{
+      const {name , value}= e.target
+      dispatch ({
+        type : UPDATE_CLIENT_INFO,
+        payload : {
+          field : name,
+          value : value
+        }
 
+      })
+    
+  }
   return (
     <div className="clientInfo">
       <form className="p-3 flex items-stretch flex-col">
@@ -28,6 +42,7 @@ const ClientInfo: FC<ClientInfoProps> = ({proforma}) => {
             <label htmlFor="numeroFacture">{slug?.toUpperCase()} {proforma && "PROFORMA"} N </label>
             <input
               type="text"
+              onChange={(e)=>handleChange(e)}
               className="w-[50%]"
               name="numeroFacture"
               id="numb_facture"
@@ -36,6 +51,7 @@ const ClientInfo: FC<ClientInfoProps> = ({proforma}) => {
           <div className="emissionDate pt-[0.5rem]">
             <label htmlFor="date_ofEmission"> Date d'emission : </label>
             <input
+            onChange={(e)=>handleChange(e)}
               type="date"
               className="w-[50%]"
               name="date_ofEmission"
@@ -47,6 +63,7 @@ const ClientInfo: FC<ClientInfoProps> = ({proforma}) => {
           <div className="all w-[100%]">
             <div className="clientCode p-[0.2rem]">
               <input
+              onChange={(e)=>handleChange(e)}
                 type="text"
                 name="client_code"
                 id="C_code"
@@ -56,6 +73,7 @@ const ClientInfo: FC<ClientInfoProps> = ({proforma}) => {
             <div className="clientFullname p-[0.2rem]">
               <input
                 type="text"
+                onChange={(e)=>handleChange(e)}
                 name="Client_Fullname"
                 id="C_fullname"
                 placeholder="Nom et Prenom du client"
@@ -64,6 +82,7 @@ const ClientInfo: FC<ClientInfoProps> = ({proforma}) => {
             <div className="clientAddress p-[0.2rem]">
               <input
                 type="text"
+                onChange={(e)=>handleChange(e)}
                 name="Client_Address"
                 id="client_address"
                 placeholder="Address du client"
@@ -72,6 +91,7 @@ const ClientInfo: FC<ClientInfoProps> = ({proforma}) => {
             <div className="client_cityAndZIP_code p-[0.2rem]">
               <input
                 type="text"
+                onChange={(e)=>handleChange(e)}
                 name="client_ZIP"
                 id="C_Zip"
                 className="w-[20%] mr-1"
@@ -79,6 +99,7 @@ const ClientInfo: FC<ClientInfoProps> = ({proforma}) => {
               />
               <input
                 type="text"
+                onChange={(e)=>handleChange(e)}
                 name="client_city"
                 id="c_City"
                 placeholder="ville"
@@ -86,12 +107,13 @@ const ClientInfo: FC<ClientInfoProps> = ({proforma}) => {
             </div>
 
             <div className="clientCountry p-[0.2rem]">
-              <input type="text" name="Pays" id="Pays" placeholder="Pays" />
+              <input type="text" onChange={(e)=>handleChange(e)} name="Country" id="Pays" placeholder="Pays" />
             </div>
             <div className="clientEmail p-[0.2rem]">
               <input
                 type="text"
                 name="phone"
+                onChange={(e)=>handleChange(e)}
                 id="phone "
                 placeholder="email et telephone"
               />
@@ -99,6 +121,7 @@ const ClientInfo: FC<ClientInfoProps> = ({proforma}) => {
             <div className="clientTva p-[0.2rem]">
               <input
                 type="text"
+                onChange={(e)=>handleChange(e)}
                 name="client_tva"
                 id="c_tva"
                 placeholder="Numero TVA  du client ( facultatif)"
@@ -108,7 +131,7 @@ const ClientInfo: FC<ClientInfoProps> = ({proforma}) => {
         </div>
         <div className="titleAdInput mt-2">
           <p>Mettez ici un titre</p>
-          <input type="text" name="Title" id="titleAdd" className="w-[25%]" />
+          <input type="text" onChange={(e)=>handleChange(e)} name="Title" id="titleAdd" className="w-[25%]" />
         </div>
       </form>
     </div>

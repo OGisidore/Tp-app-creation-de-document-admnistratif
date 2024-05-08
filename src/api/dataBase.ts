@@ -11,7 +11,15 @@ const dataStructure: any = [
         primaryKey: '_id'
       },
     ],
+    companyInfo: [
+      {
+        indexes: [
+          {_id: { unique: true } }
+        ],
+        primaryKey: '_id'
+      },
+    ],
   }
 ];
 
-export const db = new EsperoDB('Documents', dataStructure, 1);
+export const db = new EsperoDB('Documents', dataStructure, 5);

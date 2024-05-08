@@ -240,7 +240,7 @@ const EditCopy: FC<EditCopyProps> = () => {
 
                 <div className="tablesBody mt-2 lg:mt-0 border-solid border-gray-950 border-1 lg:border-0 grid grid-cols-12"
                 >
-                  <TableBodyLine withTVA={withTVA} />
+                  <TableBodyLine row={row} withTVA={withTVA} />
                   <div className="bg-gray-100 col-span-12 sm:col-span-1 lg:col-span-1 md:col-span-4">
                     <div className="action flex justify-between px-1 font-bold  bg-gray-100">
                       <div className="titles">
